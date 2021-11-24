@@ -12,12 +12,28 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body class="body">
+    <!-- dialog box that takes the link and the name for the new favourite -->
     <div class="dialogOuterBox">
         <dialog id="newFav" class="dialogNewFavourite">
-            <input type="text" id="name" placeholder="Name">
-            <input type="text" id="url" placeholder="URL">
-            <button id="close">x</button>
-            <button id="create">create favourite</button>
+            <div id="inputBoxWrapper">
+                <div id="inputBox">
+                    <div id="nameBox">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" placeholder="Name">
+                    </div>
+                    <div id="urlBox">
+                        <label for="url">URL:</label>
+                        <input type="text" id="url" placeholder="URL">
+                    </div>
+                </div>
+            </div>
+            <div id="buttonContainer">
+                <!-- i know that the way i wrote cansel was wrong -->
+                <!-- i dont know spelling to the words -->
+                <!-- im a programmer -->
+                <button id="close">cansel</button>
+                <button id="create">create favourite</button>
+            </div>
         </dialog>
     </div>
 

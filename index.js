@@ -206,9 +206,7 @@ class favourites {
         /**
          * removes all the favourites from the data base
          */
-        if (this.sync == true) {
-            chrome.storage.sync.set({ favourites: this.favourites });
-        }
+        chrome.storage.sync.set({ favourites: [] });
     }
 
     addFavourite(name, link) {
