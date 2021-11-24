@@ -1,0 +1,15 @@
+{
+    "manifest_version": 2,
+    "name": "neuTab",
+    "version" : "0.2",
+    "web_accessible_resources": [
+        "assets/*"
+    ],
+    "chrome_url_overrides":{
+        "newtab": "index.html"
+    },
+    "permissions":[
+        "topSites",
+        "storage"
+    ]
+}

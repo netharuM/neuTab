@@ -1,0 +1,260 @@
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------- */
+/* to display the clock */
+
+.clock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: -webkit-linear-gradient(#eee, #333);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 3px 3px 5px #1b1a1a, -3px -3px 5px #2b2b2b;
+    padding: 3px;
+    border-radius: 5px;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------------ */
+/* popup that contains shortcuts */
+
+.shortcutContainer {
+    display: flex;
+    /* justify-content: space-between; */
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    width: 100%;
+    border-radius: 20px;
+    background-color: #212121;
+    box-shadow: 3px 3px 5px #1b1a1a, -3px -3px 5px #2b2b2b;
+}
+
+/* ----------------------------------------------------------------------------------------------------------------------------------- */
+/* favourites container */
+
+.favourites {
+    display: flex;
+    /* justify-content: space-between; */
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 20px;
+    background-color: #212121;
+    box-shadow: 3px 3px 5px #1b1a1a, -3px -3px 5px #2b2b2b;
+}
+
+/* ----------------------------------------------------------------------------------------------------------------------- */
+/* the box that stores the links (shortcuts and favourites) */
+
+.box {
+    padding: 32px;
+}
+
+/* -------------------------------------------------------------------------------------------------------------- */
+/* body */
+
+.body {
+    background-image: url(assets/black-dust.jpg);
+    /* filter: blur(8px);
+    -webkit-filter: blur(8px); */
+    width: 100%;
+    height: 100vh;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-right: 15px;
+    padding-left: 15px;
+    box-sizing: border-box;
+}
+
+/* ----------------------------------------------------------------------------------------------------------------------- */
+/* top bar  */
+
+.top-bar {
+    width: 100%;
+    height: 40px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+    background-color: #212121;
+    /* box-shadow: 3px 3px 5px #1b1a1a, -3px -3px 5px #2b2b2b; */
+    border: none;
+    text-transform: uppercase;
+    padding: 10px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    /* transform: scale(0.97); */
+}
+
+.top-bar:hover {
+    box-shadow: inset 3px 3px 5px #1b1a1a, inset -3px -3px 5px #2b2b2b;
+    /* transform: scale(0.98); */
+}
+
+/* ------------------------------------------------------------------------------------------------------------- */
+/* for the adding favourites button */
+
+.addFavouriteBtn {
+    width: 100px;
+    height: 100px;
+    margin: 15px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 11px;
+    background-color: #212121;
+    box-shadow: 3px 3px 5px #1b1a1a, -3px -3px 5px #2b2b2b;
+    border: none;
+    color: #ffffff;
+    text-transform: uppercase;
+    padding: 10px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.addFavouriteBtn:hover {
+    box-shadow: none;
+    transform: scale(0.98);
+}
+
+.addFavouriteBtn:active {
+    box-shadow: inset 3px 3px 5px #1b1a1a, inset -3px -3px 5px #2b2b2b;
+    transform: scale(0.98);
+    color: #7b7c7e;
+}
+/* --------------------------------------------------------------------------------------------------- */
+/* for the shortcutButton */
+.shortcutBtn {
+    width: 100px;
+    height: 100px;
+    margin: 15px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background-color: #212121;
+    box-shadow: 3px 3px 5px #1b1a1a, -3px -3px 5px #2b2b2b;
+    border: none;
+    color: #ffffff;
+    text-transform: uppercase;
+    padding: 10px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.shortcutBtn:hover {
+    /* background-color: #ffffff; */
+    color: #474747;
+    border-style: solid;
+    transform: scale(1.2);
+}
+
+.shortcutBtn:active {
+    box-shadow: inset 3px 3px 5px #1b1a1a, inset -3px -3px 5px #2b2b2b;
+    transform: scale(0.98);
+}
+
+/* ---------------------------------------------------------------------------------------------------------- */
+/* for the favouritesButtons */
+
+.favouritesBtn {
+    width: 100px;
+    height: 100px;
+    margin: 15px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background-color: #212121;
+    box-shadow: 3px 3px 5px #1b1a1a, -3px -3px 5px #2b2b2b;
+    border: none;
+    color: #ffffff;
+    text-transform: uppercase;
+    padding: 10px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.favouritesBtn:hover {
+    box-shadow: none;
+    transform: scale(0.98);
+}
+
+.favouritesBtn:active {
+    box-shadow: inset 3px 3px 5px #1b1a1a, inset -3px -3px 5px #2b2b2b;
+    transform: scale(0.98);
+}
+
+/* --------------------------------------------------------------------------------------------------------------  */
+
+.appName {
+    /* margin: 15px 10px; */
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background-color: #212121;
+    box-shadow: 3px 3px 5px #1b1a1a, -3px -3px 5px #2b2b2b;
+    border: none;
+    /* color: #ffffff; */
+    background: -webkit-linear-gradient(#eee, #333);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+    font-weight: 900;
+    letter-spacing: 2px;
+    padding: 3px;
+}
+
+.appName:hover {
+    box-shadow: none;
+    transform: scale(0.98);
+}
+
+.appName:active {
+    box-shadow: inset 3px 3px 5px #1b1a1a, inset -3px -3px 5px #2b2b2b;
+    transform: scale(0.98);
+}
+
+.menu {
+    background: -webkit-linear-gradient(#eee, #333);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    box-shadow: 3px 3px 5px #1b1a1a, -3px -3px 5px #2b2b2b;
+    padding: 3px;
+    border-radius: 5px;
+}
+
+.dialogOuterBox {
+    top: 50%;
+    left: 50%;
+    position: absolute;
+}
+
+.dialogNewFavourite {
+    position: relative;
+
+    width: 600px;
+    margin-left: -300px;
+
+    height: 400px;
+    margin-top: -200px;
+}

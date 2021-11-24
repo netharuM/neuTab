@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Tab</title>
+    <!-- <script defer src="index.js"></script> -->
+    <script defer src="index.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+<body class="body">
+    <div class="dialogOuterBox">
+        <dialog id="newFav" class="dialogNewFavourite">
+            <input type="text" id="name" placeholder="Name">
+            <input type="text" id="url" placeholder="URL">
+            <button id="close">x</button>
+            <button id="create">create favourite</button>
+        </dialog>
+    </div>
+
+    <!-- the bar in the top -->
+    <div id="topbar" class="top-bar">
+        <div class="appName" id="appName">
+            <i class="material-icons" style="margin-left: 5px;">home</i>
+        </div>
+        <br>
+        <div id="clock" class="clock">
+            <div id="countClock">clock</div>
+            <br>
+            <i class="material-icons" style="margin-left: 5px;">query_builder</i>
+        </div>
+        <br>
+        <div id="menu" class="menu">
+            <i class="material-icons" style="margin-left: 5px;">nightlight_round</i>
+        </div>
+    </div>
+    
+    <!-- shortcuts and favourites container -->
+    <div class="box">
+        <div class="shortcutContainer" id="shortcutContainer">
+            <!-- container that stores shortcuts -->
+        </div>
+        <div class=favourites id="favourites">
+            <button class="addFavouriteBtn" id="addFavourite">
+                <i class="material-icons">add</i>
+            </button>
+        </div>
+    </div>
+</body>
+</html>
