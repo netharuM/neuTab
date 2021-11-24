@@ -120,11 +120,15 @@ class favourites {
                 var close = this.newFav.querySelector("#close");
                 close.addEventListener("click", () => {
                     this.newFav.close();
+                    name.value = "";
+                    url.value = "";
                 });
                 var create = this.newFav.querySelector("#create");
                 create.addEventListener("click", () => {
                     this.setNewFavourite(name.value, url.value);
                     this.newFav.close();
+                    name.value = "";
+                    url.value = "";
                 });
             },
             false
