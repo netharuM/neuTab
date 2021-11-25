@@ -98,12 +98,10 @@ class favourites {
         this.addBtn.addEventListener(
             "mouseover",
             (result) => {
-                if (this.blockEvent == false) {
-                    appName.innerHTML = "Add new favourite";
-                    this.addBtn.onmouseout = () => {
-                        appName.innerHTML = this.homeIcon;
-                    };
-                }
+                appName.innerHTML = "Add new favourite";
+                this.addBtn.onmouseout = () => {
+                    appName.innerHTML = this.homeIcon;
+                };
             },
             false
         );
