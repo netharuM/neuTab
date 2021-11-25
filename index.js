@@ -90,6 +90,7 @@ class favourites {
     constructor(
         homeIcon = '<i class="material-icons" style="margin-left: 5px;">home</i>'
     ) {
+        this.root = document.querySelector(":root");
         this.favourites = [];
         this.sync = true;
         this.homeIcon = homeIcon;
@@ -97,10 +98,12 @@ class favourites {
         this.addBtn.addEventListener(
             "mouseover",
             (result) => {
-                appName.innerHTML = "Add new favourite";
-                this.addBtn.onmouseout = () => {
-                    appName.innerHTML = this.homeIcon;
-                };
+                if (this.blockEvent == false) {
+                    appName.innerHTML = "Add new favourite";
+                    this.addBtn.onmouseout = () => {
+                        appName.innerHTML = this.homeIcon;
+                    };
+                }
             },
             false
         );
@@ -115,11 +118,16 @@ class favourites {
             () => {
                 console.log("adding a new favourite");
                 this.newFav.show();
+                this.root.style.setProperty("--filter", "blur(3px)");
+                this.root.style.setProperty("--block-index", "1");
+                appName.innerHTML = "Adding a new favourite";
                 var name = this.newFav.querySelector("#name");
                 var url = this.newFav.querySelector("#url");
                 var close = this.newFav.querySelector("#close");
                 close.addEventListener("click", () => {
                     this.newFav.close();
+                    this.root.style.setProperty("--filter", "none");
+                    this.root.style.setProperty("--block-index", "-2");
                     name.value = "";
                     url.value = "";
                 });
@@ -127,6 +135,8 @@ class favourites {
                 create.addEventListener("click", () => {
                     this.setNewFavourite(name.value, url.value);
                     this.newFav.close();
+                    this.root.style.setProperty("--filter", "none");
+                    this.root.style.setProperty("--block-index", "-2");
                     name.value = "";
                     url.value = "";
                 });
