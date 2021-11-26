@@ -258,53 +258,6 @@ class favourites {
     }
 }
 
-// class ContectMenu {
-//     constructor(contextMenuElement, element, menu) {
-//         this.root = document.querySelector(":root");
-//         this.context = document.getElementById(contextMenuElement);
-//         this.element = element;
-//         this.menu = menu;
-//         element.onclick = (e) => {
-//             this.hideMenu(e);
-//         };
-//         document.onclick = (e) => {
-//             this.hideMenu(e);
-//         };
-//         element.oncontextmenu = (e) => {
-//             this.showMenu(e);
-//         };
-
-//         if (this.menu != undefined) {
-//             this.menu.forEach((item) => {
-//                 this.appendItem(item.element, item.callBack);
-//             });
-//         }
-//     }
-
-//     hideMenu() {
-//         this.root.style.setProperty("--blocker-context-menu", "-2");
-//         this.context.style.display = "none";
-//     }
-
-//     showMenu(e) {
-//         e.preventDefault();
-//         if (this.context.style.display == "none") {
-//             this.root.style.setProperty("--blocker-context-menu", "0");
-//             this.context.style.display = "block";
-//             this.context.style.left = e.pageX + "px";
-//             this.context.style.top = e.pageY + "px";
-//         } else {
-//             this.context.style.display = "none";
-//             this.root.style.setProperty("--blocker-context-menu", "-2");
-//         }
-//     }
-
-//     appendItem(element, callback) {
-//         element.addEventListener("click", callback, false);
-//         this.context.appendChild(element);
-//     }
-// }
-
 class contextMenu {
     constructor(menuItems) {
         this.opened = false;
