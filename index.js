@@ -247,20 +247,6 @@ class favourites {
         icon.height = "25";
         span.appendChild(icon);
         span.appendChild(document.createElement("br"));
-        var removeButton = document.createElement("div");
-        removeButton.innerHTML = "remove";
-        const contextMenu = new ContectMenu(
-            "context-menu",
-            document.getElementById(favourite.id),
-            [
-                {
-                    callBack: () => {
-                        alert("this is still in development");
-                    },
-                    element: removeButton,
-                },
-            ]
-        );
     }
 
     getFaviconFromUrl(url) {
@@ -272,66 +258,125 @@ class favourites {
     }
 }
 
-class ContectMenu {
-    constructor(contextMenuElement, element, menu) {
+// class ContectMenu {
+//     constructor(contextMenuElement, element, menu) {
+//         this.root = document.querySelector(":root");
+//         this.context = document.getElementById(contextMenuElement);
+//         this.element = element;
+//         this.menu = menu;
+//         element.onclick = (e) => {
+//             this.hideMenu(e);
+//         };
+//         document.onclick = (e) => {
+//             this.hideMenu(e);
+//         };
+//         element.oncontextmenu = (e) => {
+//             this.showMenu(e);
+//         };
+
+//         if (this.menu != undefined) {
+//             this.menu.forEach((item) => {
+//                 this.appendItem(item.element, item.callBack);
+//             });
+//         }
+//     }
+
+//     hideMenu() {
+//         this.root.style.setProperty("--blocker-context-menu", "-2");
+//         this.context.style.display = "none";
+//     }
+
+//     showMenu(e) {
+//         e.preventDefault();
+//         if (this.context.style.display == "none") {
+//             this.root.style.setProperty("--blocker-context-menu", "0");
+//             this.context.style.display = "block";
+//             this.context.style.left = e.pageX + "px";
+//             this.context.style.top = e.pageY + "px";
+//         } else {
+//             this.context.style.display = "none";
+//             this.root.style.setProperty("--blocker-context-menu", "-2");
+//         }
+//     }
+
+//     appendItem(element, callback) {
+//         element.addEventListener("click", callback, false);
+//         this.context.appendChild(element);
+//     }
+// }
+
+class contextMenu {
+    constructor(menuItems) {
         this.root = document.querySelector(":root");
-        this.context = document.getElementById(contextMenuElement);
-        this.element = element;
-        this.menu = menu;
+        this.container = document.querySelector(".contextMenus");
+        this.contextMenu = document.createElement("div");
+        this.contextMenu.id = "context-menu-test";
+        this.contextMenu.style.display = "none";
+        this.contextMenu.className = "context-menu";
+        this.menu = menuItems;
+        if (this.menu != undefined) {
+            this.menu.forEach((item) => {
+                var button = item.element;
+                button.addEventListener("click", item.callBack, false);
+                this.contextMenu.appendChild(button);
+            });
+        }
+        this.container.appendChild(this.contextMenu);
+    }
+
+    addToElement(element) {
         element.onclick = (e) => {
             this.hideMenu(e);
         };
+
         document.onclick = (e) => {
             this.hideMenu(e);
         };
-        element.oncontextmenu = (e) => {
+        element.addEventListener("contextmenu", (e) => {
+            e.preventDefault();
             this.showMenu(e);
-        };
-
-        if (this.menu != undefined) {
-            this.menu.forEach((item) => {
-                this.appendItem(item.element, item.callBack);
-            });
-        }
+        });
     }
 
     hideMenu() {
         this.root.style.setProperty("--blocker-context-menu", "-2");
-        this.context.style.display = "none";
+        this.contextMenu.style.display = "none";
     }
 
     showMenu(e) {
-        e.preventDefault();
-        if (this.context.style.display == "none") {
+        if (this.contextMenu.style.display == "none") {
             this.root.style.setProperty("--blocker-context-menu", "0");
-            this.context.style.display = "block";
-            this.context.style.left = e.pageX + "px";
-            this.context.style.top = e.pageY + "px";
+            this.contextMenu.style.display = "block";
+            this.contextMenu.style.left = e.pageX + "px";
+            this.contextMenu.style.top = e.pageY + "px";
         } else {
-            this.context.style.display = "none";
+            this.contextMenu.style.display = "none";
             this.root.style.setProperty("--blocker-context-menu", "-2");
         }
-    }
-
-    appendItem(element, callback) {
-        element.addEventListener("click", callback, false);
-        this.context.appendChild(element);
     }
 }
 
 const clock = new Clock("countClock");
 const shortcutContainer = new shortcuts();
 const favouritesContainer = new favourites();
-// const contextMenu = new ContectMenu(
-//     "context-menu",
-//     document.getElementById("favourites"),
-//     [
-//         {
-//             callBack: () => {
-//                 alert("hello there");
-//             },
-//             element: document.createElement("div"),
-//         },
-//     ]
-// );
+var removeButton = document.createElement("div");
+removeButton.innerHTML = "remove";
+var notrem = document.createElement("div");
+notrem.innerHTML = "notremovetho";
+const context = new contextMenu([
+    {
+        callBack: () => {
+            alert("this is still in development");
+        },
+        element: removeButton,
+    },
+    {
+        callBack: () => {
+            alert("this is still in development not remove button this time");
+        },
+        element: notrem,
+    },
+]);
+context.addToElement(document.getElementById("favourites"));
+context.addToElement(document.getElementById("shortcutContainer"));
 shortcutContainer.setTopSites();

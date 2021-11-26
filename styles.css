@@ -444,7 +444,7 @@ input#url:focus {
     transform: scale(0.98);
 }
 
-.contextMenu {
+.contextMenus > [class^="context-menu"] {
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -461,7 +461,7 @@ input#url:focus {
     letter-spacing: 2px;
 }
 
-.contextMenu > div {
+.contextMenus > [class^="context-menu"] > div {
     width: 120px;
     padding: 5px;
     border-radius: 10px;
@@ -478,15 +478,12 @@ input#url:focus {
     z-index: 99999999999999999999999999999999999999999999999;
 }
 
-.contextMenu > div:hover {
+.contextMenus > [class^="context-menu"] > div:hover {
     box-shadow: inset 3px 3px 5px #1b1a1a, inset -3px -3px 5px #2b2b2b;
-
-    /* box-shadow: 3px 3px 5px #1b1a1a, -3px -3px 5px #2b2b2b; */
     color: rgb(168, 168, 168);
 }
 
-.contextMenu > div:active {
-    /* box-shadow: inset 3px 3px 5px #1b1a1a, inset -3px -3px 5px #2b2b2b; */
+.contextMenus > [class^="context-menu"] > div:active {
     box-shadow: none;
     color: rgb(133, 133, 133);
 }
