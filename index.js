@@ -307,6 +307,8 @@ class favourites {
 
 class contextMenu {
     constructor(menuItems) {
+        this.opened = false;
+        this.elements = [];
         this.root = document.querySelector(":root");
         this.container = document.querySelector(".contextMenus");
         this.contextMenu = document.createElement("div");
@@ -322,34 +324,48 @@ class contextMenu {
             });
         }
         this.container.appendChild(this.contextMenu);
+        document.addEventListener(
+            "contextmenu",
+            (e) => {
+                for (let i = 0; i < this.elements.length; i++) {
+                    const element = this.elements[i];
+                    if (e.path[0] == element) {
+                        e.preventDefault();
+                        this.showMenu(e);
+                        break;
+                    } else if (this.opened == true) {
+                        this.hideMenu();
+                    }
+                }
+            },
+            false
+        );
+        document.addEventListener("mousedown", () => this.hideMenu(), false);
     }
 
     addToElement(element) {
-        element.onclick = (e) => {
-            this.hideMenu(e);
-        };
-
-        document.onclick = (e) => {
-            this.hideMenu(e);
-        };
-        element.addEventListener("contextmenu", (e) => {
-            e.preventDefault();
-            this.showMenu(e);
-        });
+        this.elements.push(element);
     }
 
     hideMenu() {
+        console.log("error is in here");
+        this.opened = false;
         this.root.style.setProperty("--blocker-context-menu", "-2");
         this.contextMenu.style.display = "none";
     }
 
     showMenu(e) {
         if (this.contextMenu.style.display == "none") {
+            console.log(e);
+            this.opened = true;
             this.root.style.setProperty("--blocker-context-menu", "0");
+            console.log(this.contextMenu);
             this.contextMenu.style.display = "block";
+            console.log("running it");
             this.contextMenu.style.left = e.pageX + "px";
             this.contextMenu.style.top = e.pageY + "px";
         } else {
+            this.opened = false;
             this.contextMenu.style.display = "none";
             this.root.style.setProperty("--blocker-context-menu", "-2");
         }

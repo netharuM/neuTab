@@ -461,8 +461,8 @@ input#url:focus {
     letter-spacing: 2px;
 }
 
-.contextMenus > [class^="context-menu"] > div {
-    width: 120px;
+.contextMenus > [class^="context-menu"] > * {
+    /* width: 120px; */
     padding: 5px;
     border-radius: 10px;
     background-color: #212121;
@@ -478,12 +478,12 @@ input#url:focus {
     z-index: 99999999999999999999999999999999999999999999999;
 }
 
-.contextMenus > [class^="context-menu"] > div:hover {
+.contextMenus > [class^="context-menu"] > *:hover {
     box-shadow: inset 3px 3px 5px #1b1a1a, inset -3px -3px 5px #2b2b2b;
     color: rgb(168, 168, 168);
 }
 
-.contextMenus > [class^="context-menu"] > div:active {
+.contextMenus > [class^="context-menu"] > *:active {
     box-shadow: none;
     color: rgb(133, 133, 133);
 }
