@@ -150,7 +150,6 @@ class favourites {
          */
         // getting the values from chrome to sync with the data base
         chrome.storage.sync.get(["favourites"], (result) => {
-            console.log(this.favourites);
             if (result.favourites != undefined) {
                 this.favourites = result.favourites;
                 this.refresh();
@@ -187,8 +186,6 @@ class favourites {
         /**
          * refreshes the favourites
          */
-
-        console.log(this.favourites);
         this.removeAllFavourites();
         for (var i = 0; i < this.favourites.length; i++) {
             this.addFavourite(this.favourites[i].name, this.favourites[i].link);
@@ -272,7 +269,8 @@ class contextMenu {
         if (this.menu != undefined) {
             this.menu.forEach((item) => {
                 var button = item.element;
-                button.addEventListener("click", item.callBack, false);
+                button.id = item.id;
+                button.addEventListener("mousedown", item.callBack, false);
                 this.contextMenu.appendChild(button);
             });
         }
@@ -301,7 +299,6 @@ class contextMenu {
     }
 
     hideMenu() {
-        console.log("error is in here");
         this.opened = false;
         this.root.style.setProperty("--blocker-context-menu", "-2");
         this.contextMenu.style.display = "none";
@@ -309,12 +306,9 @@ class contextMenu {
 
     showMenu(e) {
         if (this.contextMenu.style.display == "none") {
-            console.log(e);
             this.opened = true;
             this.root.style.setProperty("--blocker-context-menu", "0");
-            console.log(this.contextMenu);
             this.contextMenu.style.display = "block";
-            console.log("running it");
             this.contextMenu.style.left = e.pageX + "px";
             this.contextMenu.style.top = e.pageY + "px";
         } else {
@@ -338,12 +332,14 @@ const context = new contextMenu([
             alert("this is still in development");
         },
         element: removeButton,
+        id: "remove",
     },
     {
         callBack: () => {
             alert("this is still in development not remove button this time");
         },
         element: notrem,
+        id: "notremove",
     },
 ]);
 context.addToElement(document.getElementById("favourites"));
