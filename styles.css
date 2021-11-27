@@ -188,6 +188,7 @@ body {
     padding: 10px;
     font-weight: 900;
     letter-spacing: 2px;
+    transition: 0.1s ease-out;
 }
 
 .shortcutBtn:hover {
@@ -222,11 +223,15 @@ body {
     padding: 10px;
     font-weight: 900;
     letter-spacing: 2px;
+    transition: 0.1s ease-out;
 }
 
 .favouritesBtn:hover {
-    box-shadow: none;
-    transform: scale(0.98);
+    /* background-color: #ffffff; */
+    color: #474747;
+    /* color: dodgerblue; */
+    border-style: solid;
+    transform: scale(1.2);
 }
 
 .favouritesBtn:active {
