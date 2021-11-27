@@ -85,17 +85,18 @@ class favourites {
     /**
      *
      * controlling the favourites container
+     * @param {callBack} onCreate call back to execute when the favourite is created
      * @param {string} homeIcon the home icon for the AppName element
      */
     constructor(
-        contextMenu,
+        onCreate,
         homeIcon = '<i class="material-icons" style="margin-left: 5px;">home</i>'
     ) {
         this.root = document.querySelector(":root");
         this.favourites = [];
         this.sync = true;
         this.homeIcon = homeIcon;
-        this.contextMenu = contextMenu;
+        this.onCreate = onCreate;
         this.addBtn = document.getElementById("addFavourite");
         this.addBtn.addEventListener(
             "mouseover",
@@ -197,6 +198,7 @@ class favourites {
     removeAllFavourites(sync = false) {
         /**
          * removes all the favourites
+         * @param {boolean} sync if true it will sync with the chrome data base
          */
 
         let favBtns = document.getElementsByClassName("favouritesBtn");
@@ -246,8 +248,8 @@ class favourites {
         icon.height = "25";
         span.appendChild(icon);
         span.appendChild(document.createElement("br"));
-        if (this.contextMenu != undefined) {
-            this.contextMenu(favourite);
+        if (this.onCreate != undefined) {
+            this.onCreate(favourite);
         }
     }
 
@@ -261,6 +263,12 @@ class favourites {
 }
 
 class contextMenu {
+    /**
+     *  creating the context menu
+     * give a array of objects with the menuItems
+     *
+     * @param {Array} menuItems the menu items that will be shown in the context menu (give a array and put the items inside the array)
+     */
     constructor(menuItems) {
         this.opened = false;
         this.elements = [];
@@ -300,16 +308,27 @@ class contextMenu {
     }
 
     addToElement(element) {
+        /**
+         * when the element is added to the context menu , when it will right clicked the context menu will appear on that element
+         * including the child elements
+         * @param {HTMLElement} element the element that will be added to the context menu
+         */
         this.elements.push(element);
     }
 
     hideMenu() {
+        /**
+         * hides the context menu
+         */
         this.opened = false;
         this.root.style.setProperty("--blocker-context-menu", "-2");
         this.contextMenu.style.display = "none";
     }
 
     showMenu(e) {
+        /**
+         * making the context menu visible
+         */
         if (this.contextMenu.style.display == "none") {
             this.opened = true;
             this.root.style.setProperty("--blocker-context-menu", "0");
@@ -350,6 +369,4 @@ const shortcutContainer = new shortcuts();
 const favouritesContainer = new favourites((e) => {
     context.addToElement(e);
 });
-// context.addToElement(document.getElementById("favourites"));
-// context.addToElement(document.getElementById("shortcutContainer"));
 shortcutContainer.setTopSites();
