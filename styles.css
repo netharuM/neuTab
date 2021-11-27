@@ -148,7 +148,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 11px;
+    border-radius: 50%;
     background-color: #212121;
     box-shadow: 3px 3px 5px #1b1a1a, -3px -3px 5px #2b2b2b;
     border: none;
@@ -157,18 +157,20 @@ body {
     padding: 10px;
     font-weight: 900;
     letter-spacing: 2px;
+    transition: 0.2s ease-out;
 }
 
 .addFavouriteBtn:hover {
-    box-shadow: none;
-    color: dodgerblue;
+    border-radius: 11px;
+    color: #7b7c7e;
+    border-style: solid;
     transform: scale(1.2);
 }
 
 .addFavouriteBtn:active {
     box-shadow: inset 3px 3px 5px #1b1a1a, inset -3px -3px 5px #2b2b2b;
     transform: scale(0.98);
-    color: #7b7c7e;
+    color: dodgerblue;
 }
 /* --------------------------------------------------------------------------------------------------- */
 /* for the shortcutButton */
@@ -294,7 +296,7 @@ body {
     margin-left: -200px;
     height: 200px;
     margin-top: -100px;
-    z-index: 999999999999999;
+    z-index: 1;
     border-radius: 10px;
     background-color: #212121;
     box-shadow: 3px 3px 5px #1b1a1a, -3px -3px 5px #2b2b2b;
@@ -349,7 +351,8 @@ input#name {
     border-radius: 5px;
     background-color: #212121;
     box-shadow: 3px 3px 5px #1b1a1a, -3px -3px 5px #2b2b2b;
-    color: #ffffff;
+    /* color: #ffffff; */
+    transition: 0.3s ease-out;
 }
 
 input#name:hover {
@@ -382,7 +385,8 @@ input#url {
     border-radius: 5px;
     background-color: #212121;
     box-shadow: 3px 3px 5px #1b1a1a, -3px -3px 5px #2b2b2b;
-    color: #ffffff;
+    /* color: #ffffff; */
+    transition: 0.3s ease-out;
 }
 
 input#url:hover {
@@ -465,6 +469,7 @@ input#url:focus {
     font-weight: 900;
     padding: 5px;
     letter-spacing: 2px;
+    z-index: 2;
 }
 
 .contextMenus > [class^="context-menu"] > * {
@@ -481,7 +486,7 @@ input#url:focus {
     letter-spacing: 2px;
     margin-top: 2px;
     margin-bottom: 2px;
-    z-index: 99999999999999999999999999999999999999999999999;
+    transition: 0.1s ease-out;
 }
 
 .contextMenus > [class^="context-menu"] > *:hover {
@@ -511,7 +516,7 @@ input#url:focus {
     top: 0;
     left: 0;
     background-color: white;
-    z-index: 999999999999999999999999999999999999999999999999999999999;
+    z-index: 3;
 }
 
 .cursor-lazy {
@@ -519,11 +524,11 @@ input#url:focus {
     width: 45px;
     height: 45px;
     border-radius: 45%;
-    border: 2px solid white;
+    border: 2px solid rgb(165, 165, 165);
     position: absolute;
     transform: translate3d(-50%, -50%, 0);
     top: 0;
     left: 0;
     transition: 0.1s ease-out;
-    z-index: 9999999999999999999999999999999999999999999999999999999999;
+    z-index: 4;
 }
