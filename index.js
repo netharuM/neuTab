@@ -18,7 +18,7 @@ class shortcuts {
     /**
      *
      * to handle shortcuts
-     * @param {*} homeIcon the element for the home icon
+     * @param {HTMLElement} homeIcon the element for the home icon
      *
      */
     constructor(
@@ -344,6 +344,11 @@ class contextMenu {
 }
 
 class customCursor {
+    /**
+     *  creating the custom cursor
+     * @param {string} cursor the query selector of the element that will be the cursor
+     * @param {string} lcursor the query selector of the element that moves in after the cursor moves the thing that follows the cursor
+     */
     constructor(
         cursor = document.querySelector(".cursor"),
         lcursor = document.querySelector(".cursor-lazy")
@@ -380,6 +385,10 @@ class customCursor {
     }
 
     editCursor(event) {
+        /**
+         * updating the cursor position
+         * @param {MouseEvent} event the mouse event
+         */
         this.cursor.style.left = event.pageX + "px";
         this.cursor.style.top = event.pageY + "px";
         this.lazyCursor.style.left = event.pageX + "px";
@@ -387,21 +396,36 @@ class customCursor {
     }
 
     click(event) {
+        /**
+         * this will execute when you click in the window somewhere
+         * also this will help make the cursor little smaller so it looks nice
+         * and it gives a animation that looks like you clicked somewhere
+         */
         this.lazyCursor.style.width = "30px";
         this.lazyCursor.style.height = "30px";
     }
 
     release(event) {
+        /**
+         * realeasing the mouse cursor
+         * changing the mouse cursor back to the default state after clicked
+         */
         this.lazyCursor.style.width = "45px";
         this.lazyCursor.style.height = "45px";
     }
 
     hide() {
+        /**
+         * hiding the cursor
+         */
         this.cursor.style.display = "none";
         this.lazyCursor.style.display = "none";
     }
 
     show() {
+        /**
+         * making the cursor visible
+         */
         this.cursor.style.display = "block";
         this.lazyCursor.style.display = "block";
     }
