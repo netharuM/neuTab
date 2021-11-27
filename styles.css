@@ -73,6 +73,7 @@
 body {
     /* filter: blur(8px);
     -webkit-filter: blur(8px); */
+    overflow: hidden;
     background-color: #1b1a1a;
     width: 100%;
     height: 100vh;
@@ -493,4 +494,31 @@ input#url:focus {
     height: 100vh;
     position: fixed;
     z-index: var(--blocker-context-menu);
+}
+
+.cursor {
+    pointer-events: none;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    position: absolute;
+    transform: translate3d(-50%, -50%, 0);
+    top: 0;
+    left: 0;
+    background-color: white;
+    z-index: 999999999999999999999999999999999999999999999999999999999;
+}
+
+.cursor-lazy {
+    pointer-events: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 45%;
+    border: 2px solid white;
+    position: absolute;
+    transform: translate3d(-50%, -50%, 0);
+    top: 0;
+    left: 0;
+    transition: 0.1s ease-out;
+    z-index: 9999999999999999999999999999999999999999999999999999999999;
 }

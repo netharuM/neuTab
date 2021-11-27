@@ -343,6 +343,69 @@ class contextMenu {
     }
 }
 
+class customCursor {
+    constructor(
+        cursor = document.querySelector(".cursor"),
+        lcursor = document.querySelector(".cursor-lazy")
+    ) {
+        this.cursor = cursor;
+        this.lazyCursor = lcursor;
+
+        window.addEventListener("mousemove", (e) => {
+            this.show();
+            this.editCursor(e);
+        });
+
+        window.addEventListener(
+            "mousedown",
+            (e) => {
+                this.click(e);
+            },
+            false
+        );
+        window.addEventListener(
+            "mouseup",
+            (e) => {
+                this.release(e);
+            },
+            false
+        );
+        window.addEventListener(
+            "mouseout",
+            (e) => {
+                this.hide();
+            },
+            false
+        );
+    }
+
+    editCursor(event) {
+        this.cursor.style.left = event.pageX + "px";
+        this.cursor.style.top = event.pageY + "px";
+        this.lazyCursor.style.left = event.pageX + "px";
+        this.lazyCursor.style.top = event.pageY + "px";
+    }
+
+    click(event) {
+        this.lazyCursor.style.width = "30px";
+        this.lazyCursor.style.height = "30px";
+    }
+
+    release(event) {
+        this.lazyCursor.style.width = "45px";
+        this.lazyCursor.style.height = "45px";
+    }
+
+    hide() {
+        this.cursor.style.display = "none";
+        this.lazyCursor.style.display = "none";
+    }
+
+    show() {
+        this.cursor.style.display = "block";
+        this.lazyCursor.style.display = "block";
+    }
+}
 var removeButton = document.createElement("div");
 removeButton.innerHTML = "remove";
 var notrem = document.createElement("div");
@@ -364,6 +427,7 @@ const context = new contextMenu([
     },
 ]);
 
+cursor = new customCursor();
 const clock = new Clock("countClock");
 const shortcutContainer = new shortcuts();
 const favouritesContainer = new favourites((e) => {
