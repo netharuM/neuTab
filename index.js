@@ -88,12 +88,14 @@ class favourites {
      * @param {string} homeIcon the home icon for the AppName element
      */
     constructor(
+        contextMenu,
         homeIcon = '<i class="material-icons" style="margin-left: 5px;">home</i>'
     ) {
         this.root = document.querySelector(":root");
         this.favourites = [];
         this.sync = true;
         this.homeIcon = homeIcon;
+        this.contextMenu = contextMenu;
         this.addBtn = document.getElementById("addFavourite");
         this.addBtn.addEventListener(
             "mouseover",
@@ -244,6 +246,9 @@ class favourites {
         icon.height = "25";
         span.appendChild(icon);
         span.appendChild(document.createElement("br"));
+        if (this.contextMenu != undefined) {
+            this.contextMenu(favourite);
+        }
     }
 
     getFaviconFromUrl(url) {
@@ -280,7 +285,7 @@ class contextMenu {
             (e) => {
                 for (let i = 0; i < this.elements.length; i++) {
                     const element = this.elements[i];
-                    if (e.path[0] == element) {
+                    if (e.path.includes(element)) {
                         e.preventDefault();
                         this.showMenu(e);
                         break;
@@ -319,9 +324,6 @@ class contextMenu {
     }
 }
 
-const clock = new Clock("countClock");
-const shortcutContainer = new shortcuts();
-const favouritesContainer = new favourites();
 var removeButton = document.createElement("div");
 removeButton.innerHTML = "remove";
 var notrem = document.createElement("div");
@@ -342,6 +344,12 @@ const context = new contextMenu([
         id: "notremove",
     },
 ]);
-context.addToElement(document.getElementById("favourites"));
-context.addToElement(document.getElementById("shortcutContainer"));
+
+const clock = new Clock("countClock");
+const shortcutContainer = new shortcuts();
+const favouritesContainer = new favourites((e) => {
+    context.addToElement(e);
+});
+// context.addToElement(document.getElementById("favourites"));
+// context.addToElement(document.getElementById("shortcutContainer"));
 shortcutContainer.setTopSites();
