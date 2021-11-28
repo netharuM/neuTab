@@ -199,13 +199,13 @@ class favourites {
         }
     }
 
-    removeFavourite(id) {
+    removeFavourite(element) {
         /**
          * removing a single favourite
          * @param {string} id the id of the favourite
          */
         this.favourites.forEach((favourite, index) => {
-            if (favourite.element.id == id) {
+            if (favourite.element == element) {
                 favourite.element.remove();
                 this.favourites.splice(index, 1);
 
@@ -301,11 +301,18 @@ class contextMenu {
         this.contextMenu.style.display = "none";
         this.contextMenu.className = "context-menu";
         this.menu = menuItems;
+        this.lastClickedElement = undefined;
         if (this.menu != undefined) {
             this.menu.forEach((item) => {
                 var button = item.element;
                 button.id = item.id;
-                button.addEventListener("mousedown", item.callBack, false);
+                button.addEventListener(
+                    "mousedown",
+                    (e) => {
+                        item.callBack(this.lastClickedElement);
+                    },
+                    false
+                );
                 this.contextMenu.appendChild(button);
             });
         }
@@ -314,10 +321,11 @@ class contextMenu {
             "contextmenu",
             (e) => {
                 for (let i = 0; i < this.elements.length; i++) {
-                    const element = this.elements[i];
+                    const element = this.elements[i].element;
                     if (e.path.includes(element)) {
                         e.preventDefault();
                         this.showMenu(e);
+                        this.lastClickedElement = element;
                         break;
                     } else if (this.opened == true) {
                         this.hideMenu();
@@ -345,6 +353,7 @@ class contextMenu {
         this.opened = false;
         this.root.style.setProperty("--blocker-context-menu", "-2");
         this.contextMenu.style.display = "none";
+        this.lastClickedElement = undefined;
     }
 
     showMenu(e) {
@@ -458,14 +467,15 @@ var notrem = document.createElement("div");
 notrem.innerHTML = "notremovetho";
 const context = new contextMenu([
     {
-        callBack: () => {
-            alert("this is still in development");
+        callBack: (e) => {
+            favouritesContainer.removeFavourite(e);
         },
         element: removeButton,
         id: "remove",
     },
     {
-        callBack: () => {
+        callBack: (e) => {
+            console.log(e);
             alert("this is still in development not remove button this time");
         },
         element: notrem,
@@ -477,6 +487,11 @@ cursor = new customCursor();
 const clock = new Clock("countClock");
 const shortcutContainer = new shortcuts();
 const favouritesContainer = new favourites((e) => {
-    context.addToElement(e);
+    context.addToElement({
+        element: e,
+        callBack: () => {
+            alert("custom one");
+        },
+    });
 });
 shortcutContainer.setTopSites();
