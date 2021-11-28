@@ -321,7 +321,7 @@ class contextMenu {
             "contextmenu",
             (e) => {
                 for (let i = 0; i < this.elements.length; i++) {
-                    const element = this.elements[i].element;
+                    const element = this.elements[i];
                     if (e.path.includes(element)) {
                         e.preventDefault();
                         this.showMenu(e);
@@ -487,11 +487,6 @@ cursor = new customCursor();
 const clock = new Clock("countClock");
 const shortcutContainer = new shortcuts();
 const favouritesContainer = new favourites((e) => {
-    context.addToElement({
-        element: e,
-        callBack: () => {
-            alert("custom one");
-        },
-    });
+    context.addToElement(e);
 });
 shortcutContainer.setTopSites();
