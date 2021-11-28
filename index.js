@@ -191,8 +191,29 @@ class favourites {
          */
         this.removeAllFavourites();
         for (var i = 0; i < this.favourites.length; i++) {
-            this.addFavourite(this.favourites[i].name, this.favourites[i].link);
+            var fav = this.addFavourite(
+                this.favourites[i].name,
+                this.favourites[i].link
+            );
+            this.favourites[i].element = fav;
         }
+    }
+
+    removeFavourite(id) {
+        /**
+         * removing a single favourite
+         * @param {string} id the id of the favourite
+         */
+        this.favourites.forEach((favourite, index) => {
+            if (favourite.element.id == id) {
+                favourite.element.remove();
+                this.favourites.splice(index, 1);
+
+                if (this.sync == true) {
+                    chrome.storage.sync.set({ favourites: this.favourites });
+                }
+            }
+        });
     }
 
     removeAllFavourites(sync = false) {
@@ -251,6 +272,7 @@ class favourites {
         if (this.onCreate != undefined) {
             this.onCreate(favourite);
         }
+        return favourite;
     }
 
     getFaviconFromUrl(url) {
