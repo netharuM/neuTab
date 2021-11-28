@@ -94,6 +94,11 @@ class favourites {
     ) {
         this.root = document.querySelector(":root");
         this.favourites = [];
+        this.dragData = {
+            from: null,
+            to: null,
+            over: null,
+        };
         this.sync = true;
         this.homeIcon = homeIcon;
         this.onCreate = onCreate;
@@ -273,6 +278,19 @@ class favourites {
         );
         favourite.href = link;
         favourite.id = "fav-" + link.split("/")[2];
+        favourite.draggable = true;
+        favourite.addEventListener("dragstart", (event) => {
+            favourite.classList.add(".dragging");
+            this.dragData.from = event;
+        });
+        favourite.addEventListener("dragend", (event) => {
+            favourite.classList.remove(".dragging");
+            this.dragData.to = event;
+            this.dragAndDrop();
+        });
+        favourite.addEventListener("dragover", (event) => {
+            this.dragData.over = event;
+        });
         shortcutContainer.appendChild(favourite);
         var span = document.createElement("span");
         favourite.appendChild(span);
@@ -295,6 +313,20 @@ class favourites {
          * @returns {string} the url of the favicon
          */
         return "https://icons.duckduckgo.com/ip3/" + url.split("/")[2] + ".ico";
+    }
+
+    dragAndDrop() {
+        var from = null;
+        var to = null;
+        this.favourites.forEach((favourite, index) => {
+            if (this.dragData.from.path.includes(favourite.element)) {
+                from = index;
+            }
+            if (this.dragData.over.path.includes(favourite.element)) {
+                to = index;
+            }
+        });
+        this.move(from, to);
     }
 }
 
