@@ -206,14 +206,28 @@ class favourites {
          */
         this.favourites.forEach((favourite, index) => {
             if (favourite.element == element) {
-                favourite.element.remove();
                 this.favourites.splice(index, 1);
 
                 if (this.sync == true) {
                     chrome.storage.sync.set({ favourites: this.favourites });
+                } else {
+                    favourite.element.remove();
                 }
             }
         });
+    }
+
+    move(from, to) {
+        if (to >= this.favourites.length) {
+            var k = to - this.favourites.length + 1;
+            while (k--) {
+                this.favourites.push(undefined);
+            }
+        }
+        this.favourites.splice(to, 0, this.favourites.splice(from, 1)[0]);
+        if (this.sync == true) {
+            chrome.storage.sync.set({ favourites: this.favourites });
+        }
     }
 
     removeAllFavourites(sync = false) {
