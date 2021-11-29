@@ -99,6 +99,7 @@ class favourites {
             to: null,
             over: null,
         };
+        this.moveIndicator = document.querySelector(".mover");
         this.sync = true;
         this.homeIcon = homeIcon;
         this.onCreate = onCreate;
@@ -230,6 +231,8 @@ class favourites {
             }
         }
         this.favourites.splice(to, 0, this.favourites.splice(from, 1)[0]);
+
+        this.hideMoveIndicator();
         if (this.sync == true) {
             chrome.storage.sync.set({ favourites: this.favourites });
         }
@@ -280,16 +283,26 @@ class favourites {
         favourite.id = "fav-" + link.split("/")[2];
         favourite.draggable = true;
         favourite.addEventListener("dragstart", (event) => {
-            favourite.classList.add(".dragging");
+            favourite.classList.add("dragging");
             this.dragData.from = event;
         });
         favourite.addEventListener("dragend", (event) => {
-            favourite.classList.remove(".dragging");
+            favourite.classList.remove("dragging");
             this.dragData.to = event;
             this.dragAndDrop();
         });
         favourite.addEventListener("dragover", (event) => {
             this.dragData.over = event;
+            favourite.classList.add("dragover");
+        });
+        favourite.addEventListener("dragleave", (e) => {
+            this.showMoveIndicator();
+            var index = Array.prototype.indexOf.call(
+                shortcutContainer.children,
+                e.target
+            );
+            this.moveIndicatorChangePosition(index);
+            favourite.classList.remove("dragover");
         });
         shortcutContainer.appendChild(favourite);
         var span = document.createElement("span");
@@ -327,6 +340,26 @@ class favourites {
             }
         });
         this.move(from, to);
+    }
+
+    moveIndicatorChangePosition(index) {
+        console.log(index);
+        var shortcutContainer = document.getElementById("favourites");
+        this.moveIndicator.remove();
+        this.moveIndicator = document.createElement("div");
+        this.moveIndicator.className = "mover";
+        shortcutContainer.insertBefore(
+            this.moveIndicator,
+            shortcutContainer.children[index]
+        );
+    }
+
+    hideMoveIndicator() {
+        this.moveIndicator.style.display = "none";
+    }
+
+    showMoveIndicator() {
+        this.moveIndicator.style.display = "block";
     }
 }
 
