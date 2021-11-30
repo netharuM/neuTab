@@ -10,6 +10,9 @@ class Clock {
     }
 
     refresh() {
+        /**
+         * refresh the clock
+         */
         this.element.innerHTML = new Date().toLocaleTimeString();
     }
 }
@@ -98,8 +101,9 @@ class favourites {
             from: null,
             to: null,
             over: null,
+            leave: null,
         };
-        this.moveIndicator = document.querySelector(".mover");
+        this.dragIndicators = [];
         this.sync = true;
         this.homeIcon = homeIcon;
         this.onCreate = onCreate;
@@ -224,6 +228,11 @@ class favourites {
     }
 
     move(from, to) {
+        /**
+         * moves the favourite to a new postion
+         * @param {string} from the index of the favourite
+         * @param {string} to the index of the favourite to move to
+         */
         if (to >= this.favourites.length) {
             var k = to - this.favourites.length + 1;
             while (k--) {
@@ -231,8 +240,6 @@ class favourites {
             }
         }
         this.favourites.splice(to, 0, this.favourites.splice(from, 1)[0]);
-
-        this.hideMoveIndicator();
         if (this.sync == true) {
             chrome.storage.sync.set({ favourites: this.favourites });
         }
@@ -284,25 +291,29 @@ class favourites {
         favourite.draggable = true;
         favourite.addEventListener("dragstart", (event) => {
             favourite.classList.add("dragging");
-            this.dragData.from = event;
+            let dragObj = {
+                dragEvent: event,
+                element: favourite,
+                index: () => {
+                    var favs = document.querySelectorAll(".favouritesBtn");
+                    return Array.from(favs).indexOf(favourite);
+                },
+            };
+            this.dragData.from = dragObj;
+            this.addDragIndicators();
         });
         favourite.addEventListener("dragend", (event) => {
             favourite.classList.remove("dragging");
-            this.dragData.to = event;
+            let dragObj = {
+                dragEvent: event,
+                element: favourite,
+                index: () => {
+                    var favs = document.querySelectorAll(".favouritesBtn");
+                    return Array.from(favs).indexOf(favourite);
+                },
+            };
+            this.dragData.to = dragObj;
             this.dragAndDrop();
-        });
-        favourite.addEventListener("dragover", (event) => {
-            this.dragData.over = event;
-            favourite.classList.add("dragover");
-        });
-        favourite.addEventListener("dragleave", (e) => {
-            this.showMoveIndicator();
-            var index = Array.prototype.indexOf.call(
-                shortcutContainer.children,
-                e.target
-            );
-            this.moveIndicatorChangePosition(index);
-            favourite.classList.remove("dragover");
         });
         shortcutContainer.appendChild(favourite);
         var span = document.createElement("span");
@@ -328,38 +339,124 @@ class favourites {
         return "https://icons.duckduckgo.com/ip3/" + url.split("/")[2] + ".ico";
     }
 
-    dragAndDrop() {
-        var from = null;
-        var to = null;
-        this.favourites.forEach((favourite, index) => {
-            if (this.dragData.from.path.includes(favourite.element)) {
-                from = index;
-            }
-            if (this.dragData.over.path.includes(favourite.element)) {
-                to = index;
-            }
-        });
-        this.move(from, to);
+    insetDragIndicatorBefore(element) {
+        /**
+         * inserst drag element before the element given
+         * @param {string} element the element to insert the indicator before
+         */
+        var indicator = this.createDragIndicator(element);
+        element.parentNode.insertBefore(indicator, element);
+        return indicator;
     }
 
-    moveIndicatorChangePosition(index) {
-        console.log(index);
+    indertDragIndicatorAt(index) {
+        /**
+         * inserts dragIndicator before the index given
+         * @param {number} index the index of the favourite
+         */
         var shortcutContainer = document.getElementById("favourites");
-        this.moveIndicator.remove();
-        this.moveIndicator = document.createElement("div");
-        this.moveIndicator.className = "mover";
+        var favourites = shortcutContainer.querySelectorAll(".favouritesBtn");
+        let arr = Array.from(shortcutContainer.children);
+        let arr2 = Array.from(favourites);
+        var indexToInsert = arr.indexOf(arr2[index]);
+        var indicator = this.createDragIndicator(
+            shortcutContainer.children[indexToInsert]
+        );
         shortcutContainer.insertBefore(
-            this.moveIndicator,
-            shortcutContainer.children[index]
+            indicator,
+            shortcutContainer.children[indexToInsert]
         );
     }
 
-    hideMoveIndicator() {
-        this.moveIndicator.style.display = "none";
+    createDragIndicator(insertedBefore) {
+        /**
+         * creates a dragIndicator
+         * @param {HTMLElement} insertedBefore the element that is dragIndicator is inserted before
+         */
+        var indicator = document.createElement("div");
+        indicator.className = "dragIndicator";
+        var dragIndicator = {
+            element: indicator,
+            index: undefined,
+            insertedBefore: insertedBefore,
+            remove: function () {
+                this.refresh();
+                indicator.remove();
+                this.getDragIndicators().splice(this.index, 1);
+            },
+            refresh: function () {
+                this.index = this.getDragIndicators().indexOf(this);
+            },
+            getDragIndicators: () => {
+                return this.dragIndicators;
+            },
+        };
+        indicator.addEventListener("dragleave", (e) => {
+            this.dragIndicators[
+                this.dragIndicators.indexOf(dragIndicator)
+            ].refresh();
+            this.dragData.leave = {
+                element: indicator,
+                index: dragIndicator.index,
+                dragIndicator: dragIndicator,
+                dragEvent: e,
+            };
+            indicator.classList.remove("dragover");
+        });
+        indicator.addEventListener("dragover", (e) => {
+            this.dragIndicators[
+                this.dragIndicators.indexOf(dragIndicator)
+            ].refresh();
+            this.dragData.over = {
+                element: indicator,
+                index: dragIndicator.index,
+                dragIndicator: dragIndicator,
+                dragEvent: e,
+            };
+            indicator.classList.add("dragover");
+        });
+        this.dragIndicators.push(dragIndicator);
+        this.dragIndicators[
+            this.dragIndicators.indexOf(dragIndicator)
+        ].refresh();
+        return indicator;
     }
 
-    showMoveIndicator() {
-        this.moveIndicator.style.display = "block";
+    removeIndicators() {
+        /**
+         * removes all the drag indicators
+         */
+        while (this.dragIndicators.length > 0) {
+            this.dragIndicators[0].remove();
+        }
+    }
+
+    addDragIndicators() {
+        /**
+         * adds drag indicators to the favourites
+         */
+        var shortcutContainer = document.getElementById("favourites");
+        var favourites = shortcutContainer.querySelectorAll(".favouritesBtn");
+        for (let i = 0; i < favourites.length; i++) {
+            this.insetDragIndicatorBefore(favourites[i]);
+        }
+    }
+
+    dragAndDrop() {
+        /**
+         *
+         * gets the dragData and moves the favourite according to that
+         */
+        function checkIfNull(obj) {
+            for (var key in obj) {
+                if (obj[key] == null) return false;
+            }
+            return true;
+        }
+        if (checkIfNull(this.dragData)) {
+            this.move(this.dragData.from.index(), this.dragData.leave.index);
+        }
+        this.removeIndicators();
     }
 }
 
@@ -562,7 +659,7 @@ const context = new contextMenu([
     },
 ]);
 
-cursor = new customCursor();
+const cursor = new customCursor();
 const clock = new Clock("countClock");
 const shortcutContainer = new shortcuts();
 const favouritesContainer = new favourites((e) => {

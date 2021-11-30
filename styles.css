@@ -161,6 +161,10 @@ body {
     transition: 0.2s ease-out;
 }
 
+.addFavouriteBtn > * {
+    pointer-events: none;
+}
+
 .addFavouriteBtn:hover {
     border-radius: 11px;
     color: #7b7c7e;
@@ -192,6 +196,10 @@ body {
     font-weight: 900;
     letter-spacing: 2px;
     transition: 0.1s ease-out;
+}
+
+.shortcutBtn > * {
+    pointer-events: none;
 }
 
 .shortcutBtn:hover {
@@ -247,10 +255,28 @@ body {
     transform: scale(0.98);
 }
 
+.dragIndicator {
+    width: 5px;
+    height: 100px;
+    padding: 5px;
+    background-color: rgb(255, 255, 255);
+    opacity: 0.5;
+    border-radius: 2px;
+    margin: 15px 10px;
+    transition: 0.1s ease-out;
+}
+
+.dragover {
+    opacity: 1;
+    border-radius: 10px;
+    width: 100px;
+}
+
 .dragging {
     opacity: 0.5;
 }
 
+/*
 .dragover {
     background-color: rgb(211, 211, 211);
 }
@@ -262,7 +288,7 @@ body {
     margin: 15px 10px;
     background-color: #ffffff;
     border-radius: 10px;
-}
+} */
 /* --------------------------------------------------------------------------------------------------------------  */
 
 .appName {
