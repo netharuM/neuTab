@@ -235,6 +235,7 @@ body {
     font-weight: 900;
     letter-spacing: 2px;
     transition: 0.1s ease-out;
+    animation: favBtnCreation 0.5s;
 }
 
 .favouritesBtn > * {
@@ -255,6 +256,15 @@ body {
     transform: scale(0.98);
 }
 
+@keyframes favBtnCreation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
 .dragIndicator {
     width: 5px;
     height: 100px;
@@ -264,6 +274,7 @@ body {
     border-radius: 2px;
     margin: 15px 10px;
     transition: 0.1s ease-out;
+    animation: fadeInDragIndicator 0.5s ease-out;
 }
 
 .dragover {
@@ -276,6 +287,14 @@ body {
     opacity: 0.5;
 }
 
+@keyframes fadeInDragIndicator {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 0.5;
+    }
+}
 /*
 .dragover {
     background-color: rgb(211, 211, 211);

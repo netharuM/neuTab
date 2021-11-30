@@ -349,7 +349,13 @@ class favourites {
         return indicator;
     }
 
-    indertDragIndicatorAt(index) {
+    indertDragIndicatorAt(
+        index,
+        parameters = {
+            customElement: undefined,
+            insertBefore: true,
+        }
+    ) {
         /**
          * inserts dragIndicator before the index given
          * @param {number} index the index of the favourite
@@ -360,25 +366,37 @@ class favourites {
         let arr2 = Array.from(favourites);
         var indexToInsert = arr.indexOf(arr2[index]);
         var indicator = this.createDragIndicator(
-            shortcutContainer.children[indexToInsert]
+            shortcutContainer.children[indexToInsert],
+            parameters.customElement
         );
-        shortcutContainer.insertBefore(
-            indicator,
-            shortcutContainer.children[indexToInsert]
-        );
+        if (parameters.insertBefore == true) {
+            shortcutContainer.insertBefore(
+                indicator,
+                shortcutContainer.children[indexToInsert]
+            );
+        } else {
+            shortcutContainer.insertBefore(
+                indicator,
+                shortcutContainer.children[indexToInsert].nextSibling
+            );
+        }
     }
 
-    createDragIndicator(insertedBefore) {
+    createDragIndicator(insertedBefore, customIndex) {
         /**
          * creates a dragIndicator
          * @param {HTMLElement} insertedBefore the element that is dragIndicator is inserted before
          */
         var indicator = document.createElement("div");
         indicator.className = "dragIndicator";
+        var elown = insertedBefore;
+        if (customIndex != undefined) {
+            elown = customIndex;
+        }
         var dragIndicator = {
             element: indicator,
             index: undefined,
-            insertedBefore: insertedBefore,
+            elementOwn: elown,
             remove: function () {
                 this.refresh();
                 indicator.remove();
@@ -437,9 +455,18 @@ class favourites {
          */
         var shortcutContainer = document.getElementById("favourites");
         var favourites = shortcutContainer.querySelectorAll(".favouritesBtn");
-        for (let i = 0; i < favourites.length; i++) {
+        for (let i = 0; i < favourites.length - 1; i++) {
             this.insetDragIndicatorBefore(favourites[i]);
         }
+
+        this.indertDragIndicatorAt(favourites.length - 1, {
+            customElement: favourites[favourites.length - 2],
+            insertBefore: true,
+        });
+        this.indertDragIndicatorAt(favourites.length - 1, {
+            customElement: undefined,
+            insertBefore: false,
+        });
     }
 
     dragAndDrop() {
@@ -454,9 +481,30 @@ class favourites {
             return true;
         }
         if (checkIfNull(this.dragData)) {
-            this.move(this.dragData.from.index(), this.dragData.leave.index);
+            console.log(
+                this.dragData.from.index(),
+                this.findFavouriteIndex(
+                    this.dragData.leave.dragIndicator.elementOwn
+                )
+            );
+            this.move(
+                this.dragData.from.index(),
+                this.findFavouriteIndex(
+                    this.dragData.leave.dragIndicator.elementOwn
+                )
+            );
         }
         this.removeIndicators();
+    }
+
+    findFavouriteIndex(favourite) {
+        /**
+         * finds the index of the favourite
+         * @param {number} index the index of the favourite
+         */
+        var favbtns = document.querySelectorAll(".favouritesBtn");
+        let arr = Array.from(favbtns);
+        return arr.indexOf(favourite);
     }
 }
 
