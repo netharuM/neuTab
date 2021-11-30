@@ -103,6 +103,8 @@ class favourites {
             over: null,
             leave: null,
         };
+        this.favBtns = [];
+        this.animations = [];
         this.dragIndicators = [];
         this.sync = true;
         this.homeIcon = homeIcon;
@@ -207,6 +209,7 @@ class favourites {
             );
             this.favourites[i].element = fav;
         }
+        this.animationHandler();
     }
 
     removeFavourite(element) {
@@ -239,9 +242,20 @@ class favourites {
                 this.favourites.push(undefined);
             }
         }
+        this.animations.push({
+            element: document.querySelectorAll(".favouritesBtn")[from],
+            time: 500,
+        });
+
         this.favourites.splice(to, 0, this.favourites.splice(from, 1)[0]);
         if (this.sync == true) {
-            chrome.storage.sync.set({ favourites: this.favourites });
+            chrome.storage.sync.set({ favourites: this.favourites }, () => {
+                this.animations.push({
+                    element: document.querySelectorAll(".favouritesBtn")[to],
+                    time: 500,
+                });
+                this.animationHandler();
+            });
         }
     }
 
@@ -299,6 +313,10 @@ class favourites {
                     return Array.from(favs).indexOf(favourite);
                 },
             };
+            // favs = document.querySelectorAll(".favouritesBtn");
+            // favs.forEach((element) => {
+            //     element.style.pointerEvents = "none";
+            // });
             this.dragData.from = dragObj;
             this.addDragIndicators();
         });
@@ -312,6 +330,10 @@ class favourites {
                     return Array.from(favs).indexOf(favourite);
                 },
             };
+            // favs = document.querySelectorAll(".favouritesBtn");
+            // favs.forEach((element) => {
+            //     element.style.pointerEvents = "auto";
+            // });
             this.dragData.to = dragObj;
             this.dragAndDrop();
         });
@@ -329,6 +351,34 @@ class favourites {
             this.onCreate(favourite);
         }
         return favourite;
+    }
+
+    animationHandler() {
+        function convertTime(miliseconds) {
+            return (miliseconds % 60000) / 1000;
+        }
+
+        if (this.favBtns.length == 0) {
+            document.querySelectorAll(".favouritesBtn").forEach((element) => {
+                this.animations.push({
+                    element: element,
+                    time: 500,
+                });
+                this.favBtns.push(element);
+            });
+        }
+
+        if (this.animations.length > 0) {
+            this.animations.forEach((animation) => {
+                animation.element.style.animation = `BtnCreation ${convertTime(
+                    animation.time
+                )}s`;
+                setTimeout(() => {
+                    animation.element.style.animation = "";
+                }, animation.time);
+                this.animations = [];
+            });
+        }
     }
 
     getFaviconFromUrl(url) {
@@ -453,12 +503,18 @@ class favourites {
         /**
          * adds drag indicators to the favourites
          */
+        function checkIfNull(obj) {
+            for (var key in obj) {
+                if (obj[key] == null) return false;
+            }
+            return true;
+        }
         var shortcutContainer = document.getElementById("favourites");
         var favourites = shortcutContainer.querySelectorAll(".favouritesBtn");
         for (let i = 0; i < favourites.length - 1; i++) {
             this.insetDragIndicatorBefore(favourites[i]);
         }
-
+        console.log(favourites.length);
         this.indertDragIndicatorAt(favourites.length - 1, {
             customElement: favourites[favourites.length - 2],
             insertBefore: true,
@@ -480,19 +536,26 @@ class favourites {
             }
             return true;
         }
+
         if (checkIfNull(this.dragData)) {
-            console.log(
-                this.dragData.from.index(),
+            if (
                 this.findFavouriteIndex(
                     this.dragData.leave.dragIndicator.elementOwn
-                )
-            );
-            this.move(
-                this.dragData.from.index(),
-                this.findFavouriteIndex(
-                    this.dragData.leave.dragIndicator.elementOwn
-                )
-            );
+                ) != -1
+            ) {
+                console.log(
+                    this.dragData.from.index(),
+                    this.findFavouriteIndex(
+                        this.dragData.leave.dragIndicator.elementOwn
+                    )
+                );
+                this.move(
+                    this.dragData.from.index(),
+                    this.findFavouriteIndex(
+                        this.dragData.leave.dragIndicator.elementOwn
+                    )
+                );
+            }
         }
         this.removeIndicators();
     }

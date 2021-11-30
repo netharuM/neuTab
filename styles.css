@@ -51,6 +51,7 @@
 .favourites {
     display: flex;
     /* justify-content: space-between; */
+    /* align-items: center; */
     justify-content: center;
     flex-wrap: wrap;
     width: 100%;
@@ -196,6 +197,7 @@ body {
     font-weight: 900;
     letter-spacing: 2px;
     transition: 0.1s ease-out;
+    /* animation: BtnCreation 0.5s; */
 }
 
 .shortcutBtn > * {
@@ -235,7 +237,7 @@ body {
     font-weight: 900;
     letter-spacing: 2px;
     transition: 0.1s ease-out;
-    animation: favBtnCreation 0.5s;
+    /* animation: BtnCreation 0.5s; */
 }
 
 .favouritesBtn > * {
@@ -256,12 +258,14 @@ body {
     transform: scale(0.98);
 }
 
-@keyframes favBtnCreation {
+@keyframes BtnCreation {
     0% {
-        opacity: 0;
+        width: 0px;
+        height: 0px;
     }
     100% {
-        opacity: 1;
+        width: 100px;
+        height: 100px;
     }
 }
 
@@ -270,7 +274,7 @@ body {
     height: 100px;
     padding: 5px;
     background-color: rgb(255, 255, 255);
-    opacity: 0.5;
+    opacity: 0.1;
     border-radius: 2px;
     margin: 15px 10px;
     transition: 0.1s ease-out;
@@ -284,7 +288,9 @@ body {
 }
 
 .dragging {
-    opacity: 0.5;
+    opacity: 0;
+    width: 0px;
+    height: 0px;
 }
 
 @keyframes fadeInDragIndicator {
@@ -292,7 +298,7 @@ body {
         opacity: 0;
     }
     to {
-        opacity: 0.5;
+        opacity: 0.1;
     }
 }
 /*
@@ -357,6 +363,15 @@ body {
     position: absolute;
 }
 
+@keyframes diaBoxCreation {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
 .dialogNewFavourite {
     position: relative;
     width: 400px;
@@ -373,6 +388,7 @@ body {
     padding: 10px;
     font-weight: 900;
     letter-spacing: 2px;
+    animation: diaBoxCreation 0.2s;
 }
 
 .dialogNewFavourite > #inputBoxWrapper {
