@@ -99,9 +99,7 @@ class favourites {
         this.favourites = [];
         this.dragData = {
             from: null,
-            to: null,
-            over: null,
-            leave: null,
+            drop: null,
         };
         this.favBtns = [];
         this.animations = [];
@@ -242,9 +240,12 @@ class favourites {
                 this.favourites.push(undefined);
             }
         }
+
+        var animationTime = 250;
+
         this.animations.push({
             element: document.querySelectorAll(".favouritesBtn")[from],
-            time: 500,
+            time: animationTime,
         });
 
         this.favourites.splice(to, 0, this.favourites.splice(from, 1)[0]);
@@ -252,7 +253,7 @@ class favourites {
             chrome.storage.sync.set({ favourites: this.favourites }, () => {
                 this.animations.push({
                     element: document.querySelectorAll(".favouritesBtn")[to],
-                    time: 500,
+                    time: animationTime,
                 });
                 this.animationHandler();
             });
@@ -313,29 +314,8 @@ class favourites {
                     return Array.from(favs).indexOf(favourite);
                 },
             };
-            // favs = document.querySelectorAll(".favouritesBtn");
-            // favs.forEach((element) => {
-            //     element.style.pointerEvents = "none";
-            // });
             this.dragData.from = dragObj;
             this.addDragIndicators();
-        });
-        favourite.addEventListener("dragend", (event) => {
-            favourite.classList.remove("dragging");
-            let dragObj = {
-                dragEvent: event,
-                element: favourite,
-                index: () => {
-                    var favs = document.querySelectorAll(".favouritesBtn");
-                    return Array.from(favs).indexOf(favourite);
-                },
-            };
-            // favs = document.querySelectorAll(".favouritesBtn");
-            // favs.forEach((element) => {
-            //     element.style.pointerEvents = "auto";
-            // });
-            this.dragData.to = dragObj;
-            this.dragAndDrop();
         });
         shortcutContainer.appendChild(favourite);
         var span = document.createElement("span");
@@ -362,7 +342,7 @@ class favourites {
             document.querySelectorAll(".favouritesBtn").forEach((element) => {
                 this.animations.push({
                     element: element,
-                    time: 500,
+                    time: 450,
                 });
                 this.favBtns.push(element);
             });
@@ -460,29 +440,25 @@ class favourites {
             },
         };
         indicator.addEventListener("dragleave", (e) => {
-            this.dragIndicators[
-                this.dragIndicators.indexOf(dragIndicator)
-            ].refresh();
-            this.dragData.leave = {
-                element: indicator,
-                index: dragIndicator.index,
-                dragIndicator: dragIndicator,
-                dragEvent: e,
-            };
             indicator.classList.remove("dragover");
         });
         indicator.addEventListener("dragover", (e) => {
+            e.preventDefault();
+            indicator.classList.add("dragover");
+        });
+        indicator.addEventListener("drop", (e) => {
             this.dragIndicators[
                 this.dragIndicators.indexOf(dragIndicator)
             ].refresh();
-            this.dragData.over = {
+            this.dragData.drop = {
                 element: indicator,
                 index: dragIndicator.index,
                 dragIndicator: dragIndicator,
                 dragEvent: e,
             };
-            indicator.classList.add("dragover");
+            this.dragAndDrop();
         });
+
         this.dragIndicators.push(dragIndicator);
         this.dragIndicators[
             this.dragIndicators.indexOf(dragIndicator)
@@ -503,18 +479,11 @@ class favourites {
         /**
          * adds drag indicators to the favourites
          */
-        function checkIfNull(obj) {
-            for (var key in obj) {
-                if (obj[key] == null) return false;
-            }
-            return true;
-        }
         var shortcutContainer = document.getElementById("favourites");
         var favourites = shortcutContainer.querySelectorAll(".favouritesBtn");
         for (let i = 0; i < favourites.length - 1; i++) {
             this.insetDragIndicatorBefore(favourites[i]);
         }
-        console.log(favourites.length);
         this.indertDragIndicatorAt(favourites.length - 1, {
             customElement: favourites[favourites.length - 2],
             insertBefore: true,
@@ -532,7 +501,9 @@ class favourites {
          */
         function checkIfNull(obj) {
             for (var key in obj) {
-                if (obj[key] == null) return false;
+                if (obj[key] == null) {
+                    return false;
+                }
             }
             return true;
         }
@@ -540,22 +511,18 @@ class favourites {
         if (checkIfNull(this.dragData)) {
             if (
                 this.findFavouriteIndex(
-                    this.dragData.leave.dragIndicator.elementOwn
+                    this.dragData.drop.dragIndicator.elementOwn
                 ) != -1
             ) {
-                console.log(
-                    this.dragData.from.index(),
-                    this.findFavouriteIndex(
-                        this.dragData.leave.dragIndicator.elementOwn
-                    )
-                );
                 this.move(
                     this.dragData.from.index(),
                     this.findFavouriteIndex(
-                        this.dragData.leave.dragIndicator.elementOwn
+                        this.dragData.drop.dragIndicator.elementOwn
                     )
                 );
             }
+        } else {
+            console.log("object is null", this.dragData);
         }
         this.removeIndicators();
     }
