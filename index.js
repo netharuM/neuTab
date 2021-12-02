@@ -135,22 +135,31 @@ class favourites {
                 var name = this.newFav.querySelector("#name");
                 var url = this.newFav.querySelector("#url");
                 var close = this.newFav.querySelector("#close");
-                close.addEventListener("click", () => {
+                var create = this.newFav.querySelector("#create");
+                var closeFunction = () => {
                     this.newFav.close();
                     this.root.style.setProperty("--filter", "none");
                     this.root.style.setProperty("--block-index", "-2");
                     name.value = "";
                     url.value = "";
-                });
-                var create = this.newFav.querySelector("#create");
-                create.addEventListener("click", () => {
+                    clearEventListeners();
+                };
+                var createFunction = () => {
+                    console.log("creating a new favourite");
                     this.setNewFavourite(name.value, url.value);
                     this.newFav.close();
                     this.root.style.setProperty("--filter", "none");
                     this.root.style.setProperty("--block-index", "-2");
                     name.value = "";
                     url.value = "";
-                });
+                    clearEventListeners();
+                };
+                var clearEventListeners = () => {
+                    close.removeEventListener("click", closeFunction);
+                    create.removeEventListener("click", createFunction);
+                };
+                close.addEventListener("click", closeFunction);
+                create.addEventListener("click", createFunction);
             },
             false
         );
