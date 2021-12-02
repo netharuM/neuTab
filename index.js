@@ -27,15 +27,20 @@ class shortcuts {
     constructor(
         homeIcon = '<i class="material-icons" style="margin-left: 5px;">home</i>'
     ) {
+        this.minimum = 5;
         this.homeIcon = homeIcon;
     }
 
-    setTopSites() {
+    setTopSites(length = this.minimum) {
         /**
          * setting shortcuts as the top sites
          */
         chrome.topSites.get((data) => {
-            for (var i = 0; i < 5; i++) {
+            if (length < this.minimum) {
+                length = this.minimum;
+            }
+            this.removeAllShortcuts();
+            for (var i = 0; i < length; i++) {
                 this.addShortCut(data[i].url, data[i].title);
             }
         });
@@ -74,6 +79,17 @@ class shortcuts {
         span.appendChild(document.createElement("br"));
     }
 
+    removeAllShortcuts() {
+        /**
+         * removing all shortcuts
+         */
+        console.log("removing all shortcuts");
+        var shortcutContainer = document.getElementById("shortcutContainer");
+        while (shortcutContainer.firstChild) {
+            shortcutContainer.removeChild(shortcutContainer.firstChild);
+        }
+    }
+
     getFaviconFromUrl(url) {
         /**
          * getting the favicon from the url
@@ -93,6 +109,7 @@ class favourites {
      */
     constructor(
         onCreate,
+        onRefresh = undefined,
         homeIcon = '<i class="material-icons" style="margin-left: 5px;">home</i>'
     ) {
         this.root = document.querySelector(":root");
@@ -104,6 +121,7 @@ class favourites {
         this.favBtns = [];
         this.animations = [];
         this.dragIndicators = [];
+        this.onRefresh = onRefresh;
         this.sync = true;
         this.homeIcon = homeIcon;
         this.onCreate = onCreate;
@@ -217,6 +235,9 @@ class favourites {
             this.favourites[i].element = fav;
         }
         this.animationHandler();
+        if (this.onRefresh != undefined) {
+            this.onRefresh();
+        }
     }
 
     removeFavourite(element) {
@@ -297,6 +318,7 @@ class favourites {
          * @param {string} name the name of the favourite
          * @param {string} link the link of the favourite
          */
+        this.removeIndicators();
         var shortcutContainer = document.getElementById("favourites");
         var favourite = document.createElement("a");
         favourite.className = "favouritesBtn";
@@ -326,7 +348,14 @@ class favourites {
             this.dragData.from = dragObj;
             this.addDragIndicators();
         });
-        shortcutContainer.appendChild(favourite);
+        favourite.addEventListener("dragend", (e) => {
+            setTimeout(() => {
+                favourite.classList.remove("dragging");
+                this.removeIndicators();
+            }, 100);
+        });
+        shortcutContainer.insertBefore(favourite, this.addBtn);
+        // shortcutContainer.appendChild(favourite);
         var span = document.createElement("span");
         favourite.appendChild(span);
         var icon = document.createElement("img");
@@ -545,6 +574,14 @@ class favourites {
         let arr = Array.from(favbtns);
         return arr.indexOf(favourite);
     }
+
+    getCountOfFavourites() {
+        /**
+         * returns the count of the favourites
+         */
+        var favs = document.querySelectorAll(".favouritesBtn");
+        return favs.length;
+    }
 }
 
 class contextMenu {
@@ -749,7 +786,14 @@ const context = new contextMenu([
 const cursor = new customCursor();
 const clock = new Clock("countClock");
 const shortcutContainer = new shortcuts();
-const favouritesContainer = new favourites((e) => {
-    context.addToElement(e);
-});
+const favouritesContainer = new favourites(
+    (e) => {
+        context.addToElement(e);
+    },
+    () => {
+        shortcutContainer.setTopSites(
+            favouritesContainer.getCountOfFavourites() + 1
+        );
+    }
+);
 shortcutContainer.setTopSites();
