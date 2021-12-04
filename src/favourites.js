@@ -392,12 +392,14 @@ export class favourites {
         this.favourites.forEach((favourite, index) => {
             if (favourite.elementId == fav.id) {
                 this.favourites.splice(index, 1);
-            }
 
-            if (this.sync == true) {
-                chrome.storage.sync.set({ favourites: this.favourites });
-            } else {
-                this.refresh();
+                fav.remove();
+
+                if (this.sync == true) {
+                    chrome.storage.sync.set({ favourites: this.favourites });
+                } else {
+                    this.refresh();
+                }
             }
         });
     }
