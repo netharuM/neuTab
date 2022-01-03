@@ -96,7 +96,7 @@ class shortcuts {
          * @param {string} url the url of the favicon
          * @returns {string} the favicon url
          */
-        return "https://icons.duckduckgo.com/ip3/" + url.split("/")[2] + ".ico";
+        return "chrome://favicon/size/128@1x/" + url;
     }
 }
 

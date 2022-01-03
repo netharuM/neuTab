@@ -11,6 +11,8 @@
     },
     "permissions":[
         "topSites",
-        "storage"
-    ]
+        "storage",
+        "chrome://favicon/"
+    ],
+    "content_security_policy": "img-src chrome://favicon/;"
 }
