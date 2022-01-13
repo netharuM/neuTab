@@ -302,13 +302,9 @@ const context = new contextMenu([
 const cursor = new customCursor();
 const clock = new Clock("countClock");
 const shortcutContainer = new shortcuts();
+const { favourites } = require("./favourites");
 shortcutContainer.setTopSites();
 var favouritesContainer;
-(async () => {
-    // import the favourites
-    const favSrc = chrome.runtime.getURL("src/favourites.js");
-    const { favourites } = await import(favSrc);
-    favouritesContainer = new favourites((favourite) => {
-        context.addToElement(favourite);
-    });
-})();
+favouritesContainer = new favourites((favourite) => {
+    context.addToElement(favourite);
+});

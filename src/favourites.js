@@ -150,7 +150,7 @@ class dragAndDropHandler {
     }
 }
 
-export class favourites {
+class favourites {
     /**
      *
      * controlling the favourites container
@@ -350,6 +350,10 @@ export class favourites {
     }
 
     favicon(url) {
+        /**
+         * @param {string} url - the url of the website
+         * @returns {string} - url to the favicon
+         */
         return "chrome://favicon/size/128@1x/" + url;
     }
 
@@ -404,3 +408,7 @@ export class favourites {
         });
     }
 }
+
+module.exports = {
+    favourites,
+};

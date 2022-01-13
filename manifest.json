@@ -3,11 +3,13 @@
     "name": "neuTab",
     "version" : "0.2",
     "web_accessible_resources": [
+        "node_modules/*",
         "assets/*",
+        "dist/*",
         "src/*"
     ],
     "chrome_url_overrides":{
-        "newtab": "index.html"
+        "newtab": "./public/index.html"
     },
     "permissions":[
         "topSites",
