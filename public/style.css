@@ -135,11 +135,6 @@ body {
     /* transform: scale(0.97); */
 }
 
-.top-bar:hover {
-    box-shadow: inset 3px 3px 5px #1b1a1a, inset -3px -3px 5px #2b2b2b;
-    /* transform: scale(0.98); */
-}
-
 /* ------------------------------------------------------------------------------------------------------------- */
 /* for the adding favourites button */
 

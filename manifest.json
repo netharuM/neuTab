@@ -3,7 +3,6 @@
     "name": "neuTab",
     "version" : "0.2",
     "web_accessible_resources": [
-        "node_modules/*",
         "assets/*",
         "dist/*",
         "src/*"
