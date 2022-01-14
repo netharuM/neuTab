@@ -600,7 +600,7 @@ input#url:focus {
     transform: translate3d(-50%, -50%, 0);
     top: 0;
     left: 0;
-    /* background-color: white; */
+    background-color: white;
     z-index: 3;
 }
 
