@@ -1,5 +1,8 @@
 class settings {
     constructor() {
+        this.default = {
+            background: "../assets/black-dust.jpg",
+        };
         this.background = document.getElementById("background");
         this.settingsPanel = document.getElementById("settingsPanel");
         this.settingsOuterBox = document.getElementById("settingsOuterBox");
@@ -25,7 +28,11 @@ class settings {
             this.wallpaperChange(event)
         );
         chrome.storage.local.get("background", (result) => {
-            this.background.style.backgroundImage = `url(${result.background})`;
+            if (result.background) {
+                this.background.style.background = `url(${result.background})`;
+            } else {
+                this.background.style.background = `url(${this.default.background})`;
+            }
         });
 
         this.wallpaperOpenBtn = document.getElementById("selectWallpaperBtn");
@@ -45,9 +52,13 @@ class settings {
     }
 
     openSettings() {
+        document
+            .querySelector(":root")
+            .style.setProperty("--filter", "blur(5px)");
         this.settingsOuterBox.style.visibility = "visible";
     }
     closeSettings() {
+        document.querySelector(":root").style.setProperty("--filter", "none");
         this.settingsOuterBox.style.visibility = "hidden";
     }
 }

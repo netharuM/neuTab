@@ -22,7 +22,7 @@ body {
 }
 
 .background {
-    background-image: url("../../assets/black-dust.jpg");
+    background: #1b1a1a;
 }
 
 .top-bar {

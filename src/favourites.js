@@ -170,6 +170,7 @@ class favourites {
         this.sync = true; // for chrome data base synx
 
         this.onCreate = onCreate;
+        this.onRefresh = onRefresh;
 
         this.homeIcon = homeIcon;
         this.addBtn = document.getElementById("addFavourite"); //add favourite button
@@ -257,6 +258,10 @@ class favourites {
                 this.favBtns.pop(element);
             }
         });
+
+        if (this.onRefresh != undefined) {
+            this.onRefresh();
+        }
     }
 
     isExist(favorite) {
@@ -405,6 +410,12 @@ class favourites {
                     this.refresh();
                 }
             }
+        });
+    }
+
+    getFavouriteCount(callBack) {
+        chrome.storage.sync.get(["favourites"], (result) => {
+            callBack(result.favourites.length);
         });
     }
 }

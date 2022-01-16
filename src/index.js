@@ -31,6 +31,8 @@ class shortcuts {
     ) {
         this.minimum = 5;
         this.homeIcon = homeIcon;
+        this.onCreation = undefined;
+        this.count = 0;
     }
 
     setTopSites(length = this.minimum) {
@@ -45,7 +47,20 @@ class shortcuts {
             for (var i = 0; i < length; i++) {
                 this.addShortCut(data[i].url, data[i].title);
             }
+            this.count = length;
         });
+    }
+
+    refresh() {
+        this.removeAllShortcuts();
+        this.setTopSites(this.count);
+    }
+
+    changeCount(count) {
+        if (this.count !== count) {
+            this.count = count;
+            this.refresh();
+        }
     }
 
     addShortCut(link, name) {
@@ -69,6 +84,7 @@ class shortcuts {
         );
         shortcut.href = link;
         shortcut.id = "shortcut-" + link.split("/")[2];
+        shortcut.name = name;
         shortcutContainer.appendChild(shortcut);
         var span = document.createElement("span");
         shortcut.appendChild(span);
@@ -79,6 +95,9 @@ class shortcuts {
         icon.height = "25";
         span.appendChild(icon);
         span.appendChild(document.createElement("br"));
+        if (this.onCreation) {
+            this.onCreation(shortcut);
+        }
     }
 
     removeAllShortcuts() {
@@ -109,13 +128,13 @@ class contextMenu {
      *
      * @param {Array} menuItems the menu items that will be shown in the context menu (give a array and put the items inside the array)
      */
-    constructor(menuItems) {
+    constructor(name, menuItems) {
         this.opened = false;
         this.elements = [];
         this.root = document.querySelector(":root");
         this.container = document.querySelector(".contextMenus");
         this.contextMenu = document.createElement("div");
-        this.contextMenu.id = "context-menu-test";
+        this.contextMenu.id = `context-menu-${name}`;
         this.contextMenu.style.display = "none";
         this.contextMenu.className = "context-menu";
         this.menu = menuItems;
@@ -279,25 +298,62 @@ class customCursor {
         this.lazyCursor.style.display = "block";
     }
 }
-var removeButton = document.createElement("div");
-removeButton.innerHTML = "remove";
-var notrem = document.createElement("div");
-notrem.innerHTML = "notremovetho";
-const context = new contextMenu([
+
+function createMenuItem(icon, text) {
+    /**
+     * creating a menu item
+     * @param {string} icon the icon of the menu item
+     * @param {string} text the text of the menu item
+     * @returns {HTMLElement} the menu item
+     */
+    var menuItem = document.createElement("div");
+    menuItem.style.display = "flex";
+    menuItem.style.alignItems = "center";
+    menuItem.style.gap = "4px";
+    menuItem.innerHTML = `<i class="material-icons">${icon}</i> ${text}`;
+    return menuItem;
+}
+
+const FavContext = new contextMenu("favourites", [
     {
         callBack: (e) => {
-            favouritesContainer.removeFavourite(e);
+            e.click();
         },
-        element: removeButton,
-        id: "remove",
+        element: createMenuItem("open_in_new", "Open"),
+        id: "open",
     },
     {
         callBack: (e) => {
             console.log(e);
             alert("this is still in development not remove button this time");
         },
-        element: notrem,
-        id: "notremove",
+        element: createMenuItem("code", "development"),
+        id: "development",
+    },
+    {
+        callBack: (e) => {
+            favouritesContainer.removeFavourite(e);
+        },
+        element: createMenuItem("delete", "Remove"),
+        id: "remove",
+    },
+]);
+const shorcutContext = new contextMenu("shorctuts", [
+    {
+        callBack: (e) => {
+            let name = e.href.split("/")[2];
+            let link = e.href;
+            favouritesContainer.addFavourite(name, link);
+        },
+        element: createMenuItem("favorite", "Add to favourites"),
+    },
+    {
+        callBack: (e) => {
+            console.log(e);
+            alert("dev");
+        },
+        element: createMenuItem("code", "development"),
+        id: "development",
     },
 ]);
 
@@ -307,8 +363,21 @@ const shortcutContainer = new shortcuts(); // shortcuts (most visited sites)
 const { favourites } = require("./favourites"); // favourites
 const { settings } = require("./settings"); // settings
 const settingsHandler = new settings(); // settings handler
-shortcutContainer.setTopSites(); // setting the top sites
-var favouritesContainer;
-favouritesContainer = new favourites((favourite) => {
-    context.addToElement(favourite);
+shortcutContainer.onCreation = (element) => {
+    shorcutContext.addToElement(element);
+};
+const favouritesContainer = new favourites(
+    (favourite) => {
+        // when element is created
+        FavContext.addToElement(favourite);
+    },
+    () => {
+        // when favourites are chanaged
+        shortcutContainer.changeCount(
+            favouritesContainer.favourites.length + 1
+        );
+    }
+);
+favouritesContainer.getFavouriteCount((count) => {
+    shortcutContainer.setTopSites(count + 1);
 });
