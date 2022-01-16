@@ -301,11 +301,13 @@ const context = new contextMenu([
     },
 ]);
 
-const cursor = new customCursor();
-const clock = new Clock("countClock");
-const shortcutContainer = new shortcuts();
-const { favourites } = require("./favourites");
-shortcutContainer.setTopSites();
+const cursor = new customCursor(); // cursor thing
+const clock = new Clock("countClock"); // clock that ticks
+const shortcutContainer = new shortcuts(); // shortcuts (most visited sites)
+const { favourites } = require("./favourites"); // favourites
+const { settings } = require("./settings"); // settings
+const settingsHandler = new settings(); // settings handler
+shortcutContainer.setTopSites(); // setting the top sites
 var favouritesContainer;
 favouritesContainer = new favourites((favourite) => {
     context.addToElement(favourite);

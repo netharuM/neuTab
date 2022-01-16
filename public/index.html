@@ -9,20 +9,23 @@
 
     <script defer src="../dist/main.js"></script>
 
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./positioning.css">
+    <link rel="stylesheet" href="./settings.css">
+    <link rel="stylesheet" href="./themes/dark.css">
 </head>
 <body>
-    <div class="background"></div>
+    <div class="background" id="background"></div>
     <div class="blocker"></div>
 
     <div class="contextMenuBlocker"></div>
     <div class="contextMenus"></div>
 
+    
     <div class="cursors">
         <div class="cursor"></div>
         <div class="cursor-lazy"></div>
     </div>
-
+    
     <!-- dialog box that takes the link and the name for the new favourite -->
     <div class="dialogOuterBox">
         <dialog id="newFav" class="dialogNewFavourite">
@@ -39,15 +42,12 @@
                 </div>
             </div>
             <div id="buttonContainer">
-                <!-- i know that the way i wrote cansel was wrong -->
-                <!-- i dont know spelling to the words -->
-                <!-- im a programmer -->
                 <button id="close">cansel</button>
                 <button id="create">create favourite</button>
             </div>
         </dialog>
     </div>
-
+    
     <div class="filter-topBar">
         <!-- the bar in the top -->
         <div id="topbar" class="top-bar">
@@ -62,10 +62,23 @@
             </div>
             <br>
             <div id="menu" class="menu">
-                <i class="material-icons">email</i>
+                <i id="settingsBtn" class="material-icons">settings</i>
             </div>
         </div>
     </div>
+
+
+    <div id="settingsOuterBox" class="settingsOuterBox">
+        <div id="settingsPanel" class="settingsPanel">
+            <label class="settingsTitle">settingsPanel</label>
+            <div class="wallpaperToggle" id="wallpaperToggle">
+                <button class="selectWallpaperBtn" id="selectWallpaperBtn">select a wallpaper</button>
+                <input type="file" id="wallpaperSelector" accept="image/*" class="wallpaperOpenDialog">
+            </div>
+        </div>
+    </div>
+
+
     <div class="filter-box">
         <!-- shortcuts and favourites container -->
         <div class="box">

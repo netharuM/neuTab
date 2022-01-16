@@ -1,0 +1,214 @@
+.clock {
+    background: -webkit-linear-gradient(#eee, #333);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    box-shadow: 3px 3px 5px #1b1a1a, -3px -3px 5px #2b2b2b;
+}
+
+.shortcutContainer {
+    background-color: #212121;
+    /* box-shadow: 3px 3px 5px #1b1a1a, -3px -3px 5px #2b2b2b; */
+}
+
+.favourites {
+    background-color: #212121;
+    /* box-shadow: 3px 3px 5px #1b1a1a, -3px -3px 5px #2b2b2b; */
+    transition: 0.1s ease-in-out;
+}
+
+body {
+    background-color: #1b1a1a;
+}
+
+.background {
+    background-image: url("../../assets/black-dust.jpg");
+}
+
+.top-bar {
+    background-color: #212121;
+}
+
+.addFavouriteBtn {
+    background-color: #212121;
+    box-shadow: 3px 3px 5px #1b1a1a, -3px -3px 5px #2b2b2b;
+    color: #ffffff;
+    transition: 0.2s ease-out;
+}
+
+.addFavouriteBtn:hover {
+    color: #7b7c7e;
+}
+
+.addFavouriteBtn:active {
+    box-shadow: inset 3px 3px 5px #1b1a1a, inset -3px -3px 5px #2b2b2b;
+    color: dodgerblue;
+}
+
+.shortcutBtn {
+    background-color: #212121;
+    box-shadow: 3px 3px 5px #1b1a1a, -3px -3px 5px #2b2b2b;
+    color: #ffffff;
+}
+
+.shortcutBtn:hover {
+    color: #474747;
+}
+
+.shortcutBtn:active {
+    box-shadow: inset 3px 3px 5px #1b1a1a, inset -3px -3px 5px #2b2b2b;
+}
+
+.favouritesBtn {
+    background-color: #212121;
+    box-shadow: 3px 3px 5px #1b1a1a, -3px -3px 5px #2b2b2b;
+    color: #ffffff;
+}
+
+.favouritesBtn:hover {
+    color: #474747;
+}
+
+.favouritesBtn:active {
+    box-shadow: inset 3px 3px 5px #1b1a1a, inset -3px -3px 5px #2b2b2b;
+}
+
+.dragIndicator {
+    background-color: rgb(255, 255, 255);
+}
+
+.appName {
+    background-color: #212121;
+    box-shadow: 3px 3px 5px #1b1a1a, -3px -3px 5px #2b2b2b;
+    background: -webkit-linear-gradient(#eee, #333);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.appName {
+    background: -webkit-linear-gradient(#eee, #333);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    box-shadow: 3px 3px 5px #1b1a1a, -3px -3px 5px #2b2b2b;
+}
+
+.dialogNewFavourite {
+    background-color: #212121;
+    box-shadow: 3px 3px 5px #1b1a1a, -3px -3px 5px #2b2b2b;
+    color: #ffffff;
+}
+.dialogNewFavourite > #inputBoxWrapper > #inputBox {
+    background-color: #212121;
+    box-shadow: 3px 3px 5px #1b1a1a, -3px -3px 5px #2b2b2b;
+    color: #ffffff;
+}
+input#name {
+    background-color: #212121;
+    box-shadow: 3px 3px 5px #1b1a1a, -3px -3px 5px #2b2b2b;
+    color: #ffffff;
+    border: dodgerblue none;
+}
+input#name:hover {
+    border: dodgerblue solid 3px;
+}
+
+input#name:focus {
+    box-shadow: inset 3px 3px 5px #1b1a1a, inset -3px -3px 5px #2b2b2b;
+}
+
+input#url {
+    border: none;
+    background-color: #212121;
+    box-shadow: 3px 3px 5px #1b1a1a, -3px -3px 5px #2b2b2b;
+    color: #ffffff;
+    border: dodgerblue none;
+    transition: 0.3s ease-out;
+}
+
+input#url:hover {
+    border: dodgerblue solid 3px;
+}
+
+input#url:focus {
+    box-shadow: inset 3px 3px 5px #1b1a1a, inset -3px -3px 5px #2b2b2b;
+}
+
+#buttonContainer > #close {
+    background-color: #212121;
+    box-shadow: 3px 3px 5px #1b1a1a, -3px -3px 5px #2b2b2b;
+    border: none;
+    color: #ffffff;
+}
+
+#buttonContainer > #close:hover {
+    box-shadow: none;
+    color: rgb(255, 123, 0);
+}
+
+#buttonContainer > #close:active {
+    box-shadow: inset 3px 3px 5px #1b1a1a, inset -3px -3px 5px #2b2b2b;
+}
+
+#buttonContainer > #create {
+    background-color: #212121;
+    box-shadow: 3px 3px 5px #1b1a1a, -3px -3px 5px #2b2b2b;
+    border: none;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: 900;
+    padding: 5px;
+    letter-spacing: 2px;
+}
+
+#buttonContainer > #create:hover {
+    box-shadow: none;
+    color: dodgerblue;
+}
+
+#buttonContainer > #create:active {
+    box-shadow: inset 3px 3px 5px #1b1a1a, inset -3px -3px 5px #2b2b2b;
+}
+
+.contextMenus > [class^="context-menu"] {
+    background-color: #212121;
+    box-shadow: 3px 3px 5px #1b1a1a, -3px -3px 5px #2b2b2b;
+    color: #ffffff;
+}
+
+.contextMenus > [class^="context-menu"] > * {
+    background-color: #212121;
+    color: #ffffff;
+}
+
+.contextMenus > [class^="context-menu"] > *:hover {
+    box-shadow: inset 3px 3px 5px #1b1a1a, inset -3px -3px 5px #2b2b2b;
+    color: rgb(168, 168, 168);
+}
+
+.contextMenus > [class^="context-menu"] > *:active {
+    box-shadow: none;
+    color: rgb(133, 133, 133);
+}
+
+.cursor {
+    background-color: white;
+}
+.cursor-lazy {
+    border: 2px solid rgb(165, 165, 165);
+}
+
+.menu {
+    background: -webkit-linear-gradient(#eee, #333);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    box-shadow: 3px 3px 5px #1b1a1a, -3px -3px 5px #2b2b2b;
+    padding: 3px;
+    border-radius: 5px;
+}
+
+.menu:hover {
+    box-shadow: none;
+}

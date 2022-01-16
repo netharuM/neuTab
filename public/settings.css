@@ -1,0 +1,65 @@
+.settingsOuterBox {
+    visibility: hidden;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.wallpaperToggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    width: 100%;
+}
+
+.wallpaperToggle > button {
+    background-color: #212121;
+    box-shadow: 3px 3px 5px #1b1a1a, -3px -3px 5px #2b2b2b;
+    border: none;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: 900;
+    padding: 10px;
+    letter-spacing: 2px;
+    border-radius: 11px;
+}
+
+.wallpaperToggle > button:hover {
+    box-shadow: none;
+    color: dodgerblue;
+}
+
+.wallpaperToggle > button:active {
+    box-shadow: inset 3px 3px 5px #1b1a1a, inset -3px -3px 5px #2b2b2b;
+}
+
+.settingsPanel {
+    display: flex;
+    flex-direction: column;
+    background-color: #212121;
+    color: white;
+    border-radius: 9px;
+    border: 1px solid dodgerblue;
+    width: 300px;
+    padding: 10px;
+    z-index: 1;
+    gap: 15px;
+}
+
+.settingsTitle {
+    font-size: 1.65em;
+    color: dodgerblue;
+}
+
+.wallpaperOpenDialog {
+    visibility: hidden;
+    display: none;
+}

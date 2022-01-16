@@ -4,8 +4,7 @@
     "version" : "0.2",
     "web_accessible_resources": [
         "assets/*",
-        "dist/*",
-        "src/*"
+        "dist/*"
     ],
     "chrome_url_overrides":{
         "newtab": "./public/index.html"
@@ -15,5 +14,5 @@
         "storage",
         "chrome://favicon/"
     ],
-    "content_security_policy": "img-src chrome://favicon/;"
+    "content_security_policy": "img-src 'self' data: chrome://favicon;"
 }
