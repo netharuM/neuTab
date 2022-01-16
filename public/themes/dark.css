@@ -22,7 +22,7 @@ body {
 }
 
 .background {
-    background: #1b1a1a;
+    background-color: #1b1a1a;
 }
 
 .top-bar {
@@ -196,7 +196,10 @@ input#url:focus {
     background-color: white;
 }
 .cursor-lazy {
-    border: 2px solid rgb(165, 165, 165);
+    border-style: solid;
+    border-width: 2px;
+    color: white;
+    mix-blend-mode: difference;
 }
 
 .menu {

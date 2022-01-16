@@ -29,9 +29,9 @@ class settings {
         );
         chrome.storage.local.get("background", (result) => {
             if (result.background) {
-                this.background.style.background = `url(${result.background})`;
+                this.background.style.backgroundImage = `url(${result.background})`;
             } else {
-                this.background.style.background = `url(${this.default.background})`;
+                this.background.style.backgroundImage = `url(${this.default.background})`;
             }
         });
 

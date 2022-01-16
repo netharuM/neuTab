@@ -317,9 +317,9 @@ function createMenuItem(icon, text) {
 const FavContext = new contextMenu("favourites", [
     {
         callBack: (e) => {
-            e.click();
+            window.open(e.href, "_blank");
         },
-        element: createMenuItem("open_in_new", "Open"),
+        element: createMenuItem("open_in_new", "Open in a new tab"),
         id: "open",
     },
     {
@@ -339,6 +339,13 @@ const FavContext = new contextMenu("favourites", [
     },
 ]);
 const shorcutContext = new contextMenu("shorctuts", [
+    {
+        callBack: (e) => {
+            window.open(e.href, "_blank");
+        },
+        element: createMenuItem("open_in_new", "Open in a new tab"),
+        id: "open",
+    },
     {
         callBack: (e) => {
             let name = e.href.split("/")[2];
