@@ -194,6 +194,7 @@ input#url:focus {
 
 .cursor {
     background-color: white;
+    mix-blend-mode: difference;
 }
 .cursor-lazy {
     border-style: solid;
