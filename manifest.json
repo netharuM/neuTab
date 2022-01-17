@@ -14,5 +14,16 @@
         "storage",
         "chrome://favicon/"
     ],
+    "browser_action":{
+        "default_title": "neuTab",
+        "default_icon": "./assets/icon.png"
+    },
+    "icons":{
+        "16": "./assets/icon.png",
+        "32": "./assets/icon.png",
+        "48": "./assets/icon.png",
+        "64": "./assets/icon.png",
+        "96": "./assets/icon.png"
+    },
     "content_security_policy": "style-src 'unsafe-inline' 'self';default-src 'self';img-src 'self' data: chrome://favicon;"
 }

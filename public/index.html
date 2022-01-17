@@ -9,6 +9,7 @@
 
     <script defer src="../dist/main.js"></script>
 
+    <link rel="shortcut icon" href="../assets/icon.png" type="image/png">
     <link rel="stylesheet" href="./positioning.css">
     <link rel="stylesheet" href="./settings.css">
     <link rel="stylesheet" href="./themes/dark.css">
@@ -73,9 +74,31 @@
     <div id="settingsOuterBox" class="settingsOuterBox">
         <div id="settingsPanel" class="settingsPanel">
             <label class="settingsTitle">settingsPanel</label>
-            <div class="wallpaperToggle" id="wallpaperToggle">
-                <button class="selectWallpaperBtn" id="selectWallpaperBtn">select a wallpaper</button>
-                <input type="file" id="wallpaperSelector" accept="image/*" class="wallpaperOpenDialog">
+            <div class="tabs" id="tabs">
+                <!-- tabButtons will go here -->
+            </div>
+            <div id="tabDisplay" class="tabDisplay">
+                <div id="backgroundPage" class="backgroundPage">
+                    <div class="wallpaperToggle" id="wallpaperToggle">
+                        <button class="selectWallpaperBtn" id="selectWallpaperBtn">select a new wallpaper</button>
+                        <input type="file" id="wallpaperSelector" accept="image/*" class="wallpaperOpenDialog">
+                    </div>
+                    <div id="wallpaperSettings" class="wallpaperSettings">
+                        <label style="font-size: medium;">current wallpaper</label>
+                        <div id="previewContainer" class="previewContainer">
+                            <img id="bg_preview_settings" class="bg_preview_settings"></img>
+                        </div>
+                    </div>
+                </div>
+                <div id="themesPage" class="themesPage">
+                    themes page
+                </div>
+                <div id="cursorPage" class="cursorPage">
+                    cursor page
+                </div>
+                <div id="aboutPage" class="aboutPage">
+                    about page 
+                </div>
             </div>
         </div>
     </div>
