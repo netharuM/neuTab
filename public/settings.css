@@ -116,6 +116,7 @@
 
 .backgroundPage {
     display: flex;
+    flex-direction: column;
     gap: 15px;
 }
 
@@ -136,4 +137,63 @@
     padding-left: 12px;
     padding-right: 12px;
     border-radius: 11px;
+}
+
+.aboutPage {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.socialLink {
+    display: flex;
+    flex-direction: row;
+    border: 2px solid dodgerblue;
+    border-radius: 11px;
+    padding: 10px;
+    color: white;
+    font-size: medium;
+    text-decoration: none;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.socialLink:hover {
+    background-color: dodgerblue;
+    cursor: pointer;
+}
+
+.githubLink::before {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-image: url(../assets/icons/github-brands.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-right: 10px;
+    filter: invert(100%);
+}
+.instaLink::before {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-image: url(../assets/icons/instagram-brands.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-right: 10px;
+    filter: invert(100%);
+}
+
+.infoIcon {
+    display: block;
+    height: 100px;
+    background-image: url(../assets/icons/info-circle-solid.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-right: 10px;
+    filter: invert(100%);
 }

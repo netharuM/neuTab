@@ -71,7 +71,7 @@ class tabs {
             this.tabBox.appendChild(tabName);
         }
         document.getElementsByClassName("tab_radio")[0].checked = true;
-        this.tabArray[0].element.style.display = "block";
+        this.tabArray[0].element.style.display = null;
         if (this.tabArray[0].callback) {
             this.tabArray[0].callback();
         }
@@ -93,7 +93,7 @@ class tabs {
             for (let i = 0; i < this.tabArray.length; i++) {
                 this.tabArray[i].element.style.display = "none";
             }
-            element.style.display = "block";
+            element.style.display = null;
             if (callback) {
                 callback();
             }
@@ -153,6 +153,10 @@ class settings {
     }
 
     openSettings() {
+        // settings the version
+        document.getElementById("version").innerText = `version : v${
+            chrome.runtime.getManifest().version
+        }`;
         document
             .querySelector(":root")
             .style.setProperty("--filter", "blur(5px)");
