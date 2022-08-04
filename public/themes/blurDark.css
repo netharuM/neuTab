@@ -1,0 +1,228 @@
+.clock {
+    display: flex;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.61);
+    background-clip: text;
+}
+
+.shortcutContainer {
+
+    backdrop-filter: blur(100px);
+    background-color: #212121a8;
+    /* box-shadow: 3px 3px 5px #1b1a1a, -3px -3px 5px #2b2b2b; */
+}
+
+.favourites {
+    backdrop-filter: blur(100px);
+    background-color: #212121a8;
+    transition: 0.1s ease-in-out;
+}
+
+body {
+    background-color: #1b1a1a;
+}
+
+.background {
+    background-color: #1b1a1a;
+}
+
+.top-bar {
+    backdrop-filter: blur(100px);
+    background-color: #212121a8;
+}
+
+.addFavouriteBtn {
+    backdrop-filter: blur(100px);
+    background-color: #5f5f5f41;
+
+    transition: 0.2s ease-out;
+    border-style: hidden;
+    color: white;
+}
+
+.addFavouriteBtn:hover {
+    border: none;
+    cursor: pointer;
+    transform: none;
+    background-color: #80808041;
+
+
+}
+
+.shortcutBtn {
+    background-color: #5f5f5f41;
+    border-radius: none;
+    border: none;
+    /* box-shadow: 3px 3px 5px #1b1a1a, -3px -3px 5px #2b2b2b; */
+    color: #ffffff;
+}
+
+.shortcutBtn:hover {
+    border: none;
+    transform: none;
+    background-color: #80808041;
+}
+
+.shortcutBtn:active {
+    background-color: #212121;
+    /* box-shadow: inset 3px 3px 5px #1b1a1a, inset -3px -3px 5px #2b2b2b; */
+}
+
+.favouritesBtn {
+    background-color: #5f5f5f41;
+    border: none;
+    /* box-shadow: 3px 3px 5px #1b1a1a, -3px -3px 5px #2b2b2b; */
+    color: #ffffff;
+}
+
+.favouritesBtn:hover {
+
+    border: none;
+    transform: none;
+    background-color: #80808041;
+
+}
+
+.favouritesBtn:active {
+
+    background-color: #212121;
+}
+
+.dragIndicator {
+    background-color: rgb(255, 255, 255);
+}
+
+.appName {
+    display: flex;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.61);
+    background-clip: text;
+}
+
+.dialogNewFavourite {
+    background-color: #212121;
+    /* box-shadow: 3px 3px 5px #1b1a1a, -3px -3px 5px #2b2b2b; */
+    color: #ffffff;
+}
+
+.dialogNewFavourite>#inputBoxWrapper>#inputBox {
+    background-color: #212121;
+    box-shadow: 3px 3px 5px #1b1a1a, -3px -3px 5px #2b2b2b;
+    color: #ffffff;
+}
+
+input#name {
+    background-color: #212121;
+    box-shadow: 3px 3px 5px #1b1a1a, -3px -3px 5px #2b2b2b;
+    color: #ffffff;
+    border: dodgerblue none;
+}
+
+input#name:hover {
+    border: dodgerblue solid 3px;
+}
+
+input#name:focus {
+    box-shadow: inset 3px 3px 5px #1b1a1a, inset -3px -3px 5px #2b2b2b;
+}
+
+input#url {
+    border: none;
+    background-color: #212121;
+    box-shadow: 3px 3px 5px #1b1a1a, -3px -3px 5px #2b2b2b;
+    color: #ffffff;
+    border: dodgerblue none;
+    transition: 0.3s ease-out;
+}
+
+input#url:hover {
+    border: dodgerblue solid 3px;
+}
+
+input#url:focus {
+    box-shadow: inset 3px 3px 5px #1b1a1a, inset -3px -3px 5px #2b2b2b;
+}
+
+#buttonContainer>#close {
+    background-color: #212121;
+    box-shadow: 3px 3px 5px #1b1a1a, -3px -3px 5px #2b2b2b;
+    border: none;
+    color: #ffffff;
+}
+
+#buttonContainer>#close:hover {
+    box-shadow: none;
+    color: rgb(255, 123, 0);
+}
+
+#buttonContainer>#close:active {
+    box-shadow: inset 3px 3px 5px #1b1a1a, inset -3px -3px 5px #2b2b2b;
+}
+
+#buttonContainer>#create {
+    background-color: #212121;
+    box-shadow: 3px 3px 5px #1b1a1a, -3px -3px 5px #2b2b2b;
+    border: none;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: 900;
+    padding: 5px;
+    letter-spacing: 2px;
+}
+
+#buttonContainer>#create:hover {
+    box-shadow: none;
+    color: dodgerblue;
+}
+
+#buttonContainer>#create:active {
+    box-shadow: inset 3px 3px 5px #1b1a1a, inset -3px -3px 5px #2b2b2b;
+}
+
+.contextMenus>[class^="context-menu"] {
+    background-color: #212121;
+    color: #ffffff;
+}
+
+.contextMenus>[class^="context-menu"]>* {
+    background-color: #212121;
+    color: rgb(168, 168, 168);
+}
+
+.contextMenus>[class^="context-menu"]>*:hover {
+    color: #ffffff;
+    background-color: #80808041;
+
+}
+
+.contextMenus>[class^="context-menu"]>*:active {
+    box-shadow: none;
+    color: rgb(133, 133, 133);
+}
+
+.cursor {
+    background-color: white;
+    mix-blend-mode: difference;
+}
+
+.cursor-lazy {
+    border-style: solid;
+    border-width: 2px;
+    color: white;
+    mix-blend-mode: difference;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.61);
+    background-color: #5f5f5f41;
+
+    background-clip: text;
+}
+
+.menu:hover {
+    background-color: #80808041;
+
+
+}

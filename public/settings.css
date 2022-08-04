@@ -20,9 +20,9 @@
     width: 100%;
 }
 
-.wallpaperToggle > button {
-    border: 1px solid dodgerblue;
-    background-color: #212121;
+.wallpaperToggle>button {
+    border: 1px solid #9f9f9f;
+    background-color: transparent;
     border-radius: 11px;
     color: #ffffff;
     text-transform: uppercase;
@@ -32,14 +32,14 @@
     transition: background-color 0.2s ease-in-out;
 }
 
-.wallpaperToggle > button:hover {
-    background-color: dodgerblue;
+.wallpaperToggle>button:hover {
+    background-color: #9f9f9f;
     cursor: pointer;
     transform: scale(1.05);
     transition: transform 0.2s ease-in-out;
 }
 
-.wallpaperToggle > button:active {
+.wallpaperToggle>button:active {
     transform: scale(0.95);
     transition: transform 0.2s ease-in-out;
 }
@@ -47,10 +47,10 @@
 .settingsPanel {
     display: flex;
     flex-direction: column;
-    background-color: #212121;
+    background-color: #212121a8;
     color: white;
     border-radius: 9px;
-    border: 1px solid dodgerblue;
+    border: 1px solid #ffffff29;
     min-width: 300px;
     min-height: 450px;
     margin: 50px;
@@ -64,6 +64,7 @@
     from {
         transform: scale(0);
     }
+
     to {
         transform: scale(1);
     }
@@ -71,7 +72,7 @@
 
 .settingsTitle {
     font-size: 1.65em;
-    color: dodgerblue;
+    /* color: dodgerblue; */
 }
 
 .wallpaperOpenDialog {
@@ -88,7 +89,7 @@
     width: 100%;
     padding: 10px;
     border-radius: 9px;
-    border: 1px solid dodgerblue;
+    border: 1px solid #858585;
     gap: 15px;
     transition: background-color 0.2s ease-out;
     margin-left: 5px;
@@ -96,19 +97,21 @@
 }
 
 .tab:hover {
-    background-color: dodgerblue;
+    background-color: #ffffff66;
+    cursor: pointer;
 }
 
-.tab_radio:checked + .tab {
-    background-color: dodgerblue;
+.tab_radio:checked+.tab {
+    background-color: #ffffff66;
     transform: scaleY(1.2);
     transition: transform 0.2s ease-in-out;
+    color: white;
 }
 
 .tabs {
     display: flex;
     flex-direction: row;
-    border-bottom: 2px solid dodgerblue;
+    border-bottom: 2px solid #3e3e3e;
     padding: 5px 30px;
     padding-bottom: 10px;
     border-radius: 8px;
@@ -127,16 +130,18 @@
     min-width: 400px;
     border-radius: 9px;
 }
+
 .tab_radio {
     display: none;
 }
 
 .wallpaperSettings {
-    border-left: 3px solid dodgerblue;
-    border-right: 3px solid dodgerblue;
-    padding-left: 12px;
-    padding-right: 12px;
+    border-left: 3px solid #343434;
+    border-right: 3px solid #343434;
+    /* padding-left: 12px; */
+    /* padding-right: 12px; */
     border-radius: 11px;
+    background-color: #ffffff12;
 }
 
 .aboutPage {
@@ -148,7 +153,7 @@
 .socialLink {
     display: flex;
     flex-direction: row;
-    border: 2px solid dodgerblue;
+    border: 2px solid #ffffff29;
     border-radius: 11px;
     padding: 10px;
     color: white;
@@ -158,42 +163,6 @@
 }
 
 .socialLink:hover {
-    background-color: dodgerblue;
+    background-color: #ffffff29;
     cursor: pointer;
-}
-
-.githubLink::before {
-    content: "";
-    display: block;
-    width: 20px;
-    height: 20px;
-    background-image: url(../assets/icons/github-brands.svg);
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    margin-right: 10px;
-    filter: invert(100%);
-}
-.instaLink::before {
-    content: "";
-    display: block;
-    width: 20px;
-    height: 20px;
-    background-image: url(../assets/icons/instagram-brands.svg);
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    margin-right: 10px;
-    filter: invert(100%);
-}
-
-.infoIcon {
-    display: block;
-    height: 100px;
-    background-image: url(../assets/icons/info-circle-solid.svg);
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    margin-right: 10px;
-    filter: invert(100%);
 }

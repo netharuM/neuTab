@@ -43,6 +43,20 @@ class shortcuts {
             if (length < this.minimum) {
                 length = this.minimum;
             }
+
+            // # removes the duplicated sites with different paths
+            // ex: https://www.example.com/ and https://www.example.com/param?a=1
+            // we just wanna see a one single google.com in our shortcuts
+            // converting url path names to origins
+            //ex : http://localhost:8000/some/path/to/file.html -> http://localhost:8000
+            for (var i = 0; i < data.length; i++) {
+                data[i].url = new URL(data[i].url).origin;
+            }
+            // removing the duplicated origins
+            data = data.filter(function (value, index, array) {
+                return array.indexOf(value) === index;
+            });
+
             this.removeAllShortcuts();
             for (var i = 0; i < length; i++) {
                 this.addShortCut(data[i].url, data[i].title);
