@@ -4,8 +4,10 @@ a custom new Tab for chrome/brave browsers
 chrome extension
 
 ## screenshots
+### blur-dark theme
+![blureDarkThemeHome](./assets/dark-blur-ss.png)
 
-### lightTheme
+### light theme
 
 light theme is still in development so there maybe issues with it
 
@@ -14,7 +16,7 @@ homepage
 adding a new favourite
 ![lightThemeAddNewFavourite](./assets/lightAddNew.png)
 
-### darkTheme
+### dark theme
 
 homepage
 ![darkThemeHome](./assets/darkHome.png)
